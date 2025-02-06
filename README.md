@@ -16,7 +16,7 @@ This package relies on the installtion of `@rnmapbox/maps`, so you'll have to in
 Run this command to add the package
 
 ```
-npx expo install @youssefhenna/expo-mapbox-navigation
+npx expo install @complexify/expo-mapbox-navigation
 ```
 
 ### Configure package
@@ -27,7 +27,7 @@ In your `app.json` or `app.js`, you'll need to add a plugin for the package unde
 "plugins": [
     ...other plugins
      [
-        "@youssefhenna/expo-mapbox-navigation",
+        "@complexify/expo-mapbox-navigation",
         {
           "accessToken": "<YOUR_TOKEN>",
           "mapboxMapsVersion": "<MAPBOX_MAPS_VERSION>"
