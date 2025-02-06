@@ -1,11 +1,12 @@
 # Changelog
 
-## [x.Y.0] - YYYY-MM-DD
+## [1.0.0] - 2025-02-06
 
 ### 🛠 Breaking changes
 
 ### 🎉 New features
 - Added support for route color customization
+
   - `routeColor`: Customize main route color
   - `routeAlternateColor`: Customize alternate routes color
   - `routeCasingColor`: Customize main route casing color
