@@ -73,6 +73,9 @@ class ExpoMapboxNavigationViewController: UIViewController {
     var currentTraversedRouteColor: UIColor?
     var currentManeuverArrowColor: UIColor?
 
+    var topBannerBackgroundColor: UIColor?
+    var topBannerPrimaryTextColor: UIColor?
+
     init() {
         super.init(nibName: nil, bundle: nil)
         mapboxNavigation = ExpoMapboxNavigationViewController.navigationProvider.mapboxNavigation
@@ -212,6 +215,16 @@ class ExpoMapboxNavigationViewController: UIViewController {
         update()
     }
 
+    func setTopBannerBackgroundColor(hexColor: String) {
+        topBannerBackgroundColor = UIColor(hex: hexColor)
+        update()
+    }
+
+    func setTopBannerPrimaryTextColor(hexColor: String) {
+        topBannerPrimaryTextColor = UIColor(hex: hexColor)
+        update()
+    }
+
     func update(){
         calculateRoutesTask?.cancel()
 
@@ -279,8 +292,23 @@ class ExpoMapboxNavigationViewController: UIViewController {
         onRoutesLoaded?()
 
         let topBanner = TopBannerViewController()
-        topBanner.instructionsBannerView.distanceFormatter.locale = currentLocale
         let bottomBanner = BottomBannerViewController()
+        
+        // Customize top banner colors
+        topBanner.backgroundColor = topBannerBackgroundColor ?? UIColor(hex: "#FFFFFF") // Background color
+        topBanner.instructionsBannerView.primaryLabel.textColor = topBannerPrimaryTextColor ?? UIColor(hex: "#000000") // Primary instruction text
+        topBanner.instructionsBannerView.secondaryLabel.textColor = UIColor(hex: "#666666") // Secondary instruction text
+        topBanner.instructionsBannerView.distanceLabel.textColor = UIColor(hex: "#666666") // Distance text
+        topBanner.instructionsBannerView.separatorView.backgroundColor = UIColor(hex: "#EEEEEE") // Separator line
+        
+        // Customize bottom banner colors
+        bottomBanner.backgroundColor = UIColor(hex: "#FFFFFF") // Background color
+        bottomBanner.timeRemainingLabel.textColor = UIColor(hex: "#000000") // Time remaining text
+        bottomBanner.distanceRemainingLabel.textColor = UIColor(hex: "#666666") // Distance remaining text
+        bottomBanner.arrivalTimeLabel.textColor = UIColor(hex: "#666666") // Arrival time text
+        
+        // Set locale formatters
+        topBanner.instructionsBannerView.distanceFormatter.locale = currentLocale
         bottomBanner.distanceFormatter.locale = currentLocale
         bottomBanner.dateFormatter.locale = currentLocale
 

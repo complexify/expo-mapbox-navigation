@@ -83,6 +83,18 @@ public class ExpoMapboxNavigationModule: Module {
               view.controller.setManeuverArrowColor(hexColor: hexColor)
           }
       }
+
+      Prop("topBannerBackgroundColor") { (view: ExpoMapboxNavigationView, color: String?) in
+          if let hexColor = color {
+              view.controller.setTopBannerBackgroundColor(hexColor: hexColor)
+          }
+      }
+
+      Prop("topBannerPrimaryTextColor") { (view: ExpoMapboxNavigationView, color: String?) in
+          if let hexColor = color {
+              view.controller.setTopBannerPrimaryTextColor(hexColor: hexColor)
+          }
+      }
     }
   }
 }

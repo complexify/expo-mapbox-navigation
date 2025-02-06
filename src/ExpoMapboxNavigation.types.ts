@@ -32,4 +32,17 @@ export type ExpoMapboxNavigationViewProps = {
   onUserOffRoute?: () => void;
   onRoutesLoaded?: () => void;
   style?: StyleProp<ViewStyle>;
+  
+  // Top banner colors
+  topBannerBackgroundColor?: string;
+  topBannerPrimaryTextColor?: string;
+  topBannerSecondaryTextColor?: string;
+  topBannerDistanceTextColor?: string;
+  topBannerSeparatorColor?: string;
+  
+  // Bottom banner colors
+  bottomBannerBackgroundColor?: string;
+  bottomBannerTimeRemainingTextColor?: string;
+  bottomBannerDistanceRemainingTextColor?: string;
+  bottomBannerArrivalTimeTextColor?: string;
 };
