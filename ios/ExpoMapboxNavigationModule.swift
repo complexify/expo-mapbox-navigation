@@ -47,6 +47,42 @@ public class ExpoMapboxNavigationModule: Module {
       Prop("mute"){ (view: ExpoMapboxNavigationView, isMuted: Bool?) in
           view.controller.setIsMuted(isMuted: isMuted) 
       }
+
+      Prop("routeColor") { (view: ExpoMapboxNavigationView, color: String?) in
+          if let hexColor = color {
+              view.controller.setRouteColor(hexColor: hexColor)
+          }
+      }
+
+      Prop("routeAlternateColor") { (view: ExpoMapboxNavigationView, color: String?) in
+          if let hexColor = color {
+              view.controller.setRouteAlternateColor(hexColor: hexColor)
+          }
+      }
+
+      Prop("routeCasingColor") { (view: ExpoMapboxNavigationView, color: String?) in
+          if let hexColor = color {
+              view.controller.setRouteCasingColor(hexColor: hexColor)
+          }
+      }
+
+      Prop("routeAlternateCasingColor") { (view: ExpoMapboxNavigationView, color: String?) in
+          if let hexColor = color {
+              view.controller.setRouteAlternateCasingColor(hexColor: hexColor)
+          }
+      }
+
+      Prop("traversedRouteColor") { (view: ExpoMapboxNavigationView, color: String?) in
+          if let hexColor = color {
+              view.controller.setTraversedRouteColor(hexColor: hexColor)
+          }
+      }
+
+      Prop("maneuverArrowColor") { (view: ExpoMapboxNavigationView, color: String?) in
+          if let hexColor = color {
+              view.controller.setManeuverArrowColor(hexColor: hexColor)
+          }
+      }
     }
   }
 }

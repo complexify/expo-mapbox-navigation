@@ -16,6 +16,12 @@ export type ExpoMapboxNavigationViewProps = {
   routeExcludeList?: string[];
   mapStyle?: string;
   mute?: boolean;
+  routeColor?: string;
+  routeAlternateColor?: string;
+  routeCasingColor?: string;
+  routeAlternateCasingColor?: string;
+  traversedRouteColor?: string;
+  maneuverArrowColor?: string;
   onRouteProgressChanged?: (event: { nativeEvent: ProgressEvent }) => void;
   onCancelNavigation?: () => void;
   onWaypointArrival?: (event: {

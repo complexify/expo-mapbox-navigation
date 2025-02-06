@@ -66,6 +66,13 @@ class ExpoMapboxNavigationViewController: UIViewController {
     private var reroutingCancellable: AnyCancellable? = nil
     private var sessionCancellable: AnyCancellable? = nil
 
+    var currentRouteColor: UIColor?
+    var currentRouteAlternateColor: UIColor?
+    var currentRouteCasingColor: UIColor?
+    var currentRouteAlternateCasingColor: UIColor?
+    var currentTraversedRouteColor: UIColor?
+    var currentManeuverArrowColor: UIColor?
+
     init() {
         super.init(nibName: nil, bundle: nil)
         mapboxNavigation = ExpoMapboxNavigationViewController.navigationProvider.mapboxNavigation
@@ -173,6 +180,36 @@ class ExpoMapboxNavigationViewController: UIViewController {
         if(isMuted != nil){
             ExpoMapboxNavigationViewController.navigationProvider.routeVoiceController.speechSynthesizer.muted = isMuted!
         }
+    }
+
+    func setRouteColor(hexColor: String) {
+        currentRouteColor = UIColor(hex: hexColor)
+        update()
+    }
+
+    func setRouteAlternateColor(hexColor: String) {
+        currentRouteAlternateColor = UIColor(hex: hexColor)
+        update()
+    }
+
+    func setRouteCasingColor(hexColor: String) {
+        currentRouteCasingColor = UIColor(hex: hexColor)
+        update()
+    }
+
+    func setRouteAlternateCasingColor(hexColor: String) {
+        currentRouteAlternateCasingColor = UIColor(hex: hexColor)
+        update()
+    }
+
+    func setTraversedRouteColor(hexColor: String) {
+        currentTraversedRouteColor = UIColor(hex: hexColor)
+        update()
+    }
+
+    func setManeuverArrowColor(hexColor: String) {
+        currentManeuverArrowColor = UIColor(hex: hexColor)
+        update()
     }
 
     func update(){
@@ -287,6 +324,26 @@ class ExpoMapboxNavigationViewController: UIViewController {
         ])
         didMove(toParent: self)
         mapboxNavigation!.tripSession().startActiveGuidance(with: navigationRoutes, startLegIndex: 0)
+    
+        // Apply custom colors if set
+        if let routeColor = currentRouteColor {
+            navigationMapView?.routeColor = routeColor
+        }
+        if let alternateColor = currentRouteAlternateColor {
+            navigationMapView?.routeAlternateColor = alternateColor
+        }
+        if let casingColor = currentRouteCasingColor {
+            navigationMapView?.routeCasingColor = casingColor
+        }
+        if let alternateCasingColor = currentRouteAlternateCasingColor {
+            navigationMapView?.routeAlternateCasingColor = alternateCasingColor
+        }
+        if let traversedColor = currentTraversedRouteColor {
+            navigationMapView?.traversedRouteColor = traversedColor
+        }
+        if let arrowColor = currentManeuverArrowColor {
+            navigationMapView?.maneuverArrowColor = arrowColor
+        }
     }
 }
 extension ExpoMapboxNavigationViewController: NavigationViewControllerDelegate {
@@ -305,5 +362,22 @@ extension UIView {
 
     var recursiveSubviews: [UIView] {
         return subviews + subviews.flatMap { $0.recursiveSubviews }
+    }
+}
+
+extension UIColor {
+    convenience init(hex: String) {
+        var hexSanitized = hex.trimmingCharacters(in: .whitespacesAndNewlines)
+        hexSanitized = hexSanitized.replacingOccurrences(of: "#", with: "")
+
+        var rgb: UInt64 = 0
+
+        Scanner(string: hexSanitized).scanHexInt64(&rgb)
+
+        let r = CGFloat((rgb & 0xFF0000) >> 16) / 255.0
+        let g = CGFloat((rgb & 0x00FF00) >> 8) / 255.0
+        let b = CGFloat(rgb & 0x0000FF) / 255.0
+
+        self.init(red: r, green: g, blue: b, alpha: 1.0)
     }
 }
