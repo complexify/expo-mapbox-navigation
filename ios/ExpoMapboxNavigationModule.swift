@@ -95,6 +95,113 @@ public class ExpoMapboxNavigationModule: Module {
               view.controller.setTopBannerPrimaryTextColor(hexColor: hexColor)
           }
       }
+
+      Prop("topBannerSecondaryTextColor") { (view: ExpoMapboxNavigationView, color: String?) in
+          if let hexColor = color {
+              view.controller.setTopBannerSecondaryTextColor(hexColor: hexColor)
+          }
+      }
+
+      Prop("topBannerDistanceTextColor") { (view: ExpoMapboxNavigationView, color: String?) in
+          if let hexColor = color {
+              view.controller.setTopBannerDistanceTextColor(hexColor: hexColor)
+          }
+      }
+
+      Prop("topBannerSeparatorColor") { (view: ExpoMapboxNavigationView, color: String?) in
+          if let hexColor = color {
+              view.controller.setTopBannerSeparatorColor(hexColor: hexColor)
+          }
+      }
+
+      Prop("bottomBannerBackgroundColor") { (view: ExpoMapboxNavigationView, color: String?) in
+          if let hexColor = color {
+              view.controller.setBottomBannerBackgroundColor(hexColor: hexColor)
+          }
+      }
+
+      Prop("bottomBannerTimeRemainingTextColor") { (view: ExpoMapboxNavigationView, color: String?) in
+          if let hexColor = color {
+              view.controller.setBottomBannerTimeRemainingTextColor(hexColor: hexColor)
+          }
+      }
+
+      Prop("bottomBannerDistanceRemainingTextColor") { (view: ExpoMapboxNavigationView, color: String?) in
+          if let hexColor = color {
+              view.controller.setBottomBannerDistanceRemainingTextColor(hexColor: hexColor)
+          }
+      }
+
+      Prop("bottomBannerArrivalTimeTextColor") { (view: ExpoMapboxNavigationView, color: String?) in
+          if let hexColor = color {
+              view.controller.setBottomBannerArrivalTimeTextColor(hexColor: hexColor)
+          }
+      }
+
+      // Information Stack
+      Prop("informationStackBackgroundColor") { (view: ExpoMapboxNavigationView, color: String?) in
+          if let hexColor = color {
+              view.controller.setInformationStackBackgroundColor(hexColor: hexColor)
+          }
+      }
+
+      Prop("informationStackTextColor") { (view: ExpoMapboxNavigationView, color: String?) in
+          if let hexColor = color {
+              view.controller.setInformationStackTextColor(hexColor: hexColor)
+          }
+      }
+
+      // Resume Button
+      Prop("resumeButtonBackgroundColor") { (view: ExpoMapboxNavigationView, color: String?) in
+          if let hexColor = color {
+              view.controller.setResumeButtonBackgroundColor(hexColor: hexColor)
+          }
+      }
+
+      Prop("resumeButtonTextColor") { (view: ExpoMapboxNavigationView, color: String?) in
+          if let hexColor = color {
+              view.controller.setResumeButtonTextColor(hexColor: hexColor)
+          }
+      }
+
+      // Speed Limit
+      Prop("speedLimitBackgroundColor") { (view: ExpoMapboxNavigationView, color: String?) in
+          if let hexColor = color {
+              view.controller.setSpeedLimitBackgroundColor(hexColor: hexColor)
+          }
+      }
+
+      Prop("speedLimitTextColor") { (view: ExpoMapboxNavigationView, color: String?) in
+          if let hexColor = color {
+              view.controller.setSpeedLimitTextColor(hexColor: hexColor)
+          }
+      }
+
+      // Floating Stack
+      Prop("floatingStackBackgroundColor") { (view: ExpoMapboxNavigationView, color: String?) in
+          if let hexColor = color {
+              view.controller.setFloatingStackBackgroundColor(hexColor: hexColor)
+          }
+      }
+
+      Prop("floatingButtonsBackgroundColor") { (view: ExpoMapboxNavigationView, color: String?) in
+          if let hexColor = color {
+              view.controller.setFloatingButtonsBackgroundColor(hexColor: hexColor)
+          }
+      }
+
+      // Way Name View
+      Prop("wayNameViewBackgroundColor") { (view: ExpoMapboxNavigationView, color: String?) in
+          if let hexColor = color {
+              view.controller.setWayNameViewBackgroundColor(hexColor: hexColor)
+          }
+      }
+
+      Prop("wayNameViewTextColor") { (view: ExpoMapboxNavigationView, color: String?) in
+          if let hexColor = color {
+              view.controller.setWayNameViewTextColor(hexColor: hexColor)
+          }
+      }
     }
   }
 }
