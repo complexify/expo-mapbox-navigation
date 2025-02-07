@@ -392,51 +392,59 @@ class ExpoMapboxNavigationViewController: UIViewController {
         onCancelNavigation?()
     }
 
-    func onRoutesCalculated(navigationRoutes: NavigationRoutes){
+    func onRoutesCalculated(navigationRoutes: NavigationRoutes) {
         onRoutesLoaded?()
+
+        let topBanner = TopBannerViewController()
+        topBanner.view.backgroundColor = topBannerBackgroundColor ?? UIColor(hex: "#FFFFFF")
+        topBanner.instructionsBannerView.backgroundColor = topBannerBackgroundColor ?? UIColor(hex: "#FFFFFF")
+        topBanner.instructionsBannerView.distanceFormatter.locale = currentLocale
+
+        let bottomBanner = BottomBannerViewController()
+        bottomBanner.view.backgroundColor = bottomBannerBackgroundColor ?? UIColor(hex: "#FFFFFF")
+        bottomBanner.distanceFormatter.locale = currentLocale
+        bottomBanner.dateFormatter.locale = currentLocale
+
+        let navigationOptions = NavigationOptions(
+            mapboxNavigation: self.mapboxNavigation!,
+            voiceController: ExpoMapboxNavigationViewController.navigationProvider.routeVoiceController,
+            eventsManager: ExpoMapboxNavigationViewController.navigationProvider.eventsManager(),
+            styles: nil,
+            topBanner: topBanner,
+            bottomBanner: bottomBanner,
+            predictiveCacheManager: nil,
+            navigationMapView: nil
+        )
 
         let navigationViewController = NavigationViewController(
             navigationRoutes: navigationRoutes,
-            navigationOptions: NavigationOptions(
-                styles: [.dayStyle],
-                navigationMapView: nil,
-                voiceController: ExpoMapboxNavigationViewController.navigationProvider.routeVoiceController,
-                eventsManager: ExpoMapboxNavigationViewController.navigationProvider.eventsManager()
-            )
+            navigationOptions: navigationOptions
         )
 
         let navigationView = navigationViewController.navigationView
-
-        // Customize top banner colors
-        let topBanner = navigationView.topBannerContainerView
-        topBanner.backgroundColor = topBannerBackgroundColor ?? UIColor(hex: "#FFFFFF")
+        
+        // Then customize the properly initialized banners
         let instructionsView = navigationView.instructionsBannerView
         instructionsView.primaryLabel.textColor = topBannerPrimaryTextColor ?? UIColor(hex: "#000000")
         instructionsView.secondaryLabel.textColor = topBannerSecondaryTextColor ?? UIColor(hex: "#666666")
         instructionsView.distanceLabel.textColor = topBannerDistanceTextColor ?? UIColor(hex: "#666666")
         instructionsView.separatorView.backgroundColor = topBannerSeparatorColor ?? UIColor(hex: "#EEEEEE")
         
-        // Customize bottom banner colors
-        let bottomBanner = navigationView.bottomBannerContainerView
-        bottomBanner.backgroundColor = bottomBannerBackgroundColor ?? UIColor(hex: "#FFFFFF")
         let bottomView = navigationView.bottomBannerView
         bottomView.timeRemainingLabel.textColor = bottomBannerTimeRemainingTextColor ?? UIColor(hex: "#000000")
         bottomView.distanceRemainingLabel.textColor = bottomBannerDistanceRemainingTextColor ?? UIColor(hex: "#666666")
         bottomView.arrivalTimeLabel.textColor = bottomBannerArrivalTimeTextColor ?? UIColor(hex: "#666666")
 
         let navigationMapView = navigationView.navigationMapView
-        navigationMapView?.puckConfiguration = .puck2D()
+        navigationMapView!.puckType = .puck2D(.navigationDefault)
 
-        if let style = currentMapStyle {
-            navigationMapView?.mapView.mapboxMap.loadStyle(StyleURI(rawValue: style)) { _ in
-                navigationMapView?.localizeLabels(locale: self.currentLocale)
-                do {
-                    try navigationMapView?.mapView.mapboxMap.localizeLabels(into: self.currentLocale)
-                } catch {
-                    print("Failed to localize map labels: \(error)")
-                }
-            }
-        }
+        let style = currentMapStyle != nil ? StyleURI(rawValue: currentMapStyle!) : StyleURI.streets
+        navigationMapView!.mapView.mapboxMap.loadStyle(style!, completion: { _ in
+            navigationMapView!.localizeLabels(locale: self.currentLocale)
+            do{
+                try navigationMapView!.mapView.mapboxMap.localizeLabels(into: self.currentLocale)
+            } catch {}
+        })
 
         let cancelButton = navigationView.bottomBannerContainerView.findViews(subclassOf: CancelButton.self).first
         cancelButton?.addTarget(self, action: #selector(cancelButtonClicked), for: UIControl.Event.touchUpInside)
