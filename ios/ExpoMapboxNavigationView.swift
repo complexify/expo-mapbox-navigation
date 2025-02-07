@@ -421,28 +421,89 @@ class ExpoMapboxNavigationViewController: UIViewController {
             navigationOptions: navigationOptions
         )
 
-        topBanner.instructionsBannerView.primaryLabel.textColor = topBannerPrimaryTextColor ?? UIColor(hex: "#000000")
-        topBanner.instructionsBannerView.secondaryLabel.textColor = topBannerSecondaryTextColor ?? UIColor(hex: "#666666")
-        topBanner.instructionsBannerView.distanceLabel.textColor = topBannerDistanceTextColor ?? UIColor(hex: "#666666")
-        topBanner.instructionsBannerView.separatorView.backgroundColor = topBannerSeparatorColor ?? UIColor(hex: "#EEEEEE")
-        
+        let navigationView = navigationViewController.navigationView
+
+        // 1. Instructions Banner (Top Banner)
+        let instructionsBanner = navigationView.instructionsBannerView
+        instructionsBanner.backgroundColor = topBannerBackgroundColor ?? UIColor(hex: "#FFFFFF")
+        instructionsBanner.primaryLabel.textColor = topBannerPrimaryTextColor ?? UIColor(hex: "#000000")
+        instructionsBanner.secondaryLabel.textColor = topBannerSecondaryTextColor ?? UIColor(hex: "#666666")
+        instructionsBanner.distanceLabel.textColor = topBannerDistanceTextColor ?? UIColor(hex: "#666666")
+        instructionsBanner.separatorView.backgroundColor = topBannerSeparatorColor ?? UIColor(hex: "#EEEEEE")
+
+        // 2. Information Stack
+        let informationStack = navigationView.informationStackView
+        informationStack.backgroundColor = informationStackBackgroundColor ?? UIColor(hex: "#FFFFFF")
+        for view in informationStack.arrangedSubviews {
+            if let label = view as? UILabel {
+                label.textColor = informationStackTextColor ?? UIColor(hex: "#000000")
+            }
+        }
+
+        // 3. Bottom Banner
+        let bottomBanner = navigationView.bottomBannerView
+        bottomBanner.backgroundColor = bottomBannerBackgroundColor ?? UIColor(hex: "#FFFFFF")
         bottomBanner.timeRemainingLabel.textColor = bottomBannerTimeRemainingTextColor ?? UIColor(hex: "#000000")
         bottomBanner.distanceRemainingLabel.textColor = bottomBannerDistanceRemainingTextColor ?? UIColor(hex: "#666666")
         bottomBanner.arrivalTimeLabel.textColor = bottomBannerArrivalTimeTextColor ?? UIColor(hex: "#666666")
 
+        // 4. Resume Button
+        let resumeButton = navigationView.resumeButton
+        resumeButton.backgroundColor = resumeButtonBackgroundColor ?? UIColor(hex: "#FFFFFF")
+        resumeButton.setTitleColor(resumeButtonTextColor ?? UIColor(hex: "#000000"), for: .normal)
+
+        // 5. Speed Limit View
+        let speedLimitView = navigationView.speedLimitView
+        speedLimitView.backgroundColor = speedLimitBackgroundColor ?? UIColor(hex: "#FFFFFF")
+        if let speedLabel = speedLimitView.valueLabel {
+            speedLabel.textColor = speedLimitTextColor ?? UIColor(hex: "#000000")
+        }
+
+        // 6. Floating Stack
+        let floatingStack = navigationView.floatingStackView
+        floatingStack.backgroundColor = floatingStackBackgroundColor ?? UIColor(hex: "#FFFFFF")
+        for button in floatingStack.arrangedSubviews {
+            if let floatingButton = button as? UIButton {
+                floatingButton.backgroundColor = floatingButtonsBackgroundColor ?? UIColor(hex: "#FFFFFF")
+            }
+        }
+
+        // 7. Navigation Map
         let navigationMapView = navigationViewController.navigationMapView
         navigationMapView.puckType = .puck2D(.navigationDefault)
 
         let style = currentMapStyle != nil ? StyleURI(rawValue: currentMapStyle!) : StyleURI.streets
-        navigationMapView!.mapView.mapboxMap.loadStyle(style!, completion: { _ in
-            navigationMapView!.localizeLabels(locale: self.currentLocale)
-            do{
-                try navigationMapView!.mapView.mapboxMap.localizeLabels(into: self.currentLocale)
+        navigationMapView.mapView.mapboxMap.loadStyle(style!, completion: { _ in
+            navigationMapView.localizeLabels(locale: self.currentLocale)
+            do {
+                try navigationMapView.mapView.mapboxMap.localizeLabels(into: self.currentLocale)
             } catch {}
         })
 
-        let cancelButton = navigationView.bottomBannerContainerView.findViews(subclassOf: CancelButton.self).first
-        cancelButton?.addTarget(self, action: #selector(cancelButtonClicked), for: UIControl.Event.touchUpInside)
+        // Apply map colors
+        if let routeColor = currentRouteColor {
+            navigationMapView.routeColor = routeColor
+        }
+        if let alternateColor = currentRouteAlternateColor {
+            navigationMapView.routeAlternateColor = alternateColor
+        }
+        if let casingColor = currentRouteCasingColor {
+            navigationMapView.routeCasingColor = casingColor
+        }
+        if let alternateCasingColor = currentRouteAlternateCasingColor {
+            navigationMapView.routeAlternateCasingColor = alternateCasingColor
+        }
+        if let traversedColor = currentTraversedRouteColor {
+            navigationMapView.traversedRouteColor = traversedColor
+        }
+        if let arrowColor = currentManeuverArrowColor {
+            navigationMapView.maneuverArrowColor = arrowColor
+        }
+
+        // 8. Way Name Label
+        let wayNameView = navigationView.wayNameView
+        wayNameView.backgroundColor = wayNameViewBackgroundColor ?? UIColor(hex: "#FFFFFF")
+        wayNameView.valueLabel.textColor = wayNameViewTextColor ?? UIColor(hex: "#000000")
 
         navigationViewController.delegate = self
         addChild(navigationViewController)
@@ -456,61 +517,6 @@ class ExpoMapboxNavigationViewController: UIViewController {
         ])
         navigationViewController.didMove(toParent: self)
         mapboxNavigation!.tripSession().startActiveGuidance(with: navigationRoutes, startLegIndex: 0)
-        
-        // Apply custom colors if set
-        if let routeColor = currentRouteColor {
-            navigationMapView?.routeColor = routeColor
-        }
-        if let alternateColor = currentRouteAlternateColor {
-            navigationMapView?.routeAlternateColor = alternateColor
-        }
-        if let casingColor = currentRouteCasingColor {
-            navigationMapView?.routeCasingColor = casingColor
-        }
-        if let alternateCasingColor = currentRouteAlternateCasingColor {
-            navigationMapView?.routeAlternateCasingColor = alternateCasingColor
-        }
-        if let traversedColor = currentTraversedRouteColor {
-            navigationMapView?.traversedRouteColor = traversedColor
-        }
-        if let arrowColor = currentManeuverArrowColor {
-            navigationMapView?.maneuverArrowColor = arrowColor
-        }
-
-        // 2. Information Stack
-        let infoStack = navigationViewController.navigationView.informationStackView
-        infoStack.backgroundColor = informationStackBackgroundColor ?? UIColor(hex: "#FFFFFF")
-        for view in infoStack.arrangedSubviews {
-            if let label = view as? UILabel {
-                label.textColor = informationStackTextColor ?? UIColor(hex: "#000000")
-            }
-        }
-
-        // 4. Resume Button
-        let resumeButton = navigationViewController.navigationView.resumeButton
-        resumeButton.backgroundColor = resumeButtonBackgroundColor ?? UIColor(hex: "#FFFFFF")
-        resumeButton.setTitleColor(resumeButtonTextColor ?? UIColor(hex: "#000000"), for: UIControl.State.normal)
-
-        // 5. Speed Limit View
-        let speedLimitView = navigationViewController.navigationView.speedLimitView
-        speedLimitView.backgroundColor = speedLimitBackgroundColor ?? UIColor(hex: "#FFFFFF")
-        if let speedLabel = speedLimitView.subviews.first as? UILabel {
-            speedLabel.textColor = speedLimitTextColor ?? UIColor(hex: "#000000")
-        }
-
-        // 6. Floating Stack
-        let floatingStack = navigationViewController.navigationView.floatingStackView
-        floatingStack.backgroundColor = floatingStackBackgroundColor ?? UIColor(hex: "#FFFFFF")
-        for button in floatingStack.arrangedSubviews {
-            if let floatingButton = button as? UIButton {
-                floatingButton.backgroundColor = floatingButtonsBackgroundColor ?? UIColor(hex: "#FFFFFF")
-            }
-        }
-
-        // 8. Way Name Label
-        let wayNameView = navigationViewController.navigationView.wayNameView
-        wayNameView.backgroundColor = wayNameViewBackgroundColor ?? UIColor(hex: "#FFFFFF")
-        wayNameView.label.textColor = wayNameViewTextColor ?? UIColor(hex: "#000000")
     }
 }
 extension ExpoMapboxNavigationViewController: NavigationViewControllerDelegate {
