@@ -73,27 +73,16 @@ class ExpoMapboxNavigationViewController: UIViewController {
     var currentTraversedRouteColor: UIColor?
     var currentManeuverArrowColor: UIColor?
 
-    var topBannerBackgroundColor: UIColor?
-    var topBannerPrimaryTextColor: UIColor?
-    var topBannerSecondaryTextColor: UIColor?
-    var topBannerDistanceTextColor: UIColor?
-    var topBannerSeparatorColor: UIColor?
+    var currentTopBannerBackgroundColor: UIColor?
+    var currentTopBannerPrimaryTextColor: UIColor?
+    var currentTopBannerSecondaryTextColor: UIColor?
+    var currentTopBannerDistanceTextColor: UIColor?
+    var currentTopBannerSeparatorColor: UIColor?
 
-    var bottomBannerBackgroundColor: UIColor?
-    var bottomBannerTimeRemainingTextColor: UIColor?
-    var bottomBannerDistanceRemainingTextColor: UIColor?
-    var bottomBannerArrivalTimeTextColor: UIColor?
-
-    var informationStackBackgroundColor: UIColor?
-    var informationStackTextColor: UIColor?
-    var resumeButtonBackgroundColor: UIColor?
-    var resumeButtonTextColor: UIColor?
-    var speedLimitBackgroundColor: UIColor?
-    var speedLimitTextColor: UIColor?
-    var floatingStackBackgroundColor: UIColor?
-    var floatingButtonsBackgroundColor: UIColor?
-    var wayNameViewBackgroundColor: UIColor?
-    var wayNameViewTextColor: UIColor?
+    var currentBottomBannerBackgroundColor: UIColor?
+    var currentBottomBannerTimeRemainingTextColor: UIColor?
+    var currentBottomBannerDistanceRemainingTextColor: UIColor?
+    var currentBottomBannerArrivalTimeTextColor: UIColor?
 
     init() {
         super.init(nibName: nil, bundle: nil)
@@ -235,98 +224,39 @@ class ExpoMapboxNavigationViewController: UIViewController {
     }
 
     func setTopBannerBackgroundColor(hexColor: String) {
-        topBannerBackgroundColor = UIColor(hex: hexColor)
-        update()
+        currentTopBannerBackgroundColor = UIColor(hex: hexColor)
     }
 
     func setTopBannerPrimaryTextColor(hexColor: String) {
-        topBannerPrimaryTextColor = UIColor(hex: hexColor)
-        update()
+        currentTopBannerPrimaryTextColor = UIColor(hex: hexColor)
     }
 
     func setTopBannerSecondaryTextColor(hexColor: String) {
-        topBannerSecondaryTextColor = UIColor(hex: hexColor)
-        update()
+        currentTopBannerSecondaryTextColor = UIColor(hex: hexColor)
     }
 
     func setTopBannerDistanceTextColor(hexColor: String) {
-        topBannerDistanceTextColor = UIColor(hex: hexColor)
-        update()
+        currentTopBannerDistanceTextColor = UIColor(hex: hexColor)
     }
 
     func setTopBannerSeparatorColor(hexColor: String) {
-        topBannerSeparatorColor = UIColor(hex: hexColor)
-        update()
+        currentTopBannerSeparatorColor = UIColor(hex: hexColor)
     }
 
     func setBottomBannerBackgroundColor(hexColor: String) {
-        bottomBannerBackgroundColor = UIColor(hex: hexColor)
-        update()
+        currentBottomBannerBackgroundColor = UIColor(hex: hexColor)
     }
 
     func setBottomBannerTimeRemainingTextColor(hexColor: String) {
-        bottomBannerTimeRemainingTextColor = UIColor(hex: hexColor)
-        update()
+        currentBottomBannerTimeRemainingTextColor = UIColor(hex: hexColor)
     }
 
     func setBottomBannerDistanceRemainingTextColor(hexColor: String) {
-        bottomBannerDistanceRemainingTextColor = UIColor(hex: hexColor)
-        update()
+        currentBottomBannerDistanceRemainingTextColor = UIColor(hex: hexColor)
     }
 
     func setBottomBannerArrivalTimeTextColor(hexColor: String) {
-        bottomBannerArrivalTimeTextColor = UIColor(hex: hexColor)
-        update()
-    }
-
-    func setInformationStackBackgroundColor(hexColor: String) {
-        informationStackBackgroundColor = UIColor(hex: hexColor)
-        update()
-    }
-
-    func setInformationStackTextColor(hexColor: String) {
-        informationStackTextColor = UIColor(hex: hexColor)
-        update()
-    }
-
-    func setResumeButtonBackgroundColor(hexColor: String) {
-        resumeButtonBackgroundColor = UIColor(hex: hexColor)
-        update()
-    }
-
-    func setResumeButtonTextColor(hexColor: String) {
-        resumeButtonTextColor = UIColor(hex: hexColor)
-        update()
-    }
-
-    func setSpeedLimitBackgroundColor(hexColor: String) {
-        speedLimitBackgroundColor = UIColor(hex: hexColor)
-        update()
-    }
-
-    func setSpeedLimitTextColor(hexColor: String) {
-        speedLimitTextColor = UIColor(hex: hexColor)
-        update()
-    }
-
-    func setFloatingStackBackgroundColor(hexColor: String) {
-        floatingStackBackgroundColor = UIColor(hex: hexColor)
-        update()
-    }
-
-    func setFloatingButtonsBackgroundColor(hexColor: String) {
-        floatingButtonsBackgroundColor = UIColor(hex: hexColor)
-        update()
-    }
-
-    func setWayNameViewBackgroundColor(hexColor: String) {
-        wayNameViewBackgroundColor = UIColor(hex: hexColor)
-        update()
-    }
-
-    func setWayNameViewTextColor(hexColor: String) {
-        wayNameViewTextColor = UIColor(hex: hexColor)
-        update()
+        currentBottomBannerArrivalTimeTextColor = UIColor(hex: hexColor)
     }
 
     func update(){
@@ -392,28 +322,53 @@ class ExpoMapboxNavigationViewController: UIViewController {
         onCancelNavigation?()
     }
 
-    func onRoutesCalculated(navigationRoutes: NavigationRoutes) {
+    func onRoutesCalculated(navigationRoutes: NavigationRoutes){
         onRoutesLoaded?()
 
         let topBanner = TopBannerViewController()
-        topBanner.view.backgroundColor = topBannerBackgroundColor ?? UIColor(hex: "#FFFFFF")
-        topBanner.instructionsBannerView.backgroundColor = topBannerBackgroundColor ?? UIColor(hex: "#FFFFFF")
         topBanner.instructionsBannerView.distanceFormatter.locale = currentLocale
+        
+        // Apply top banner colors
+        if let backgroundColor = currentTopBannerBackgroundColor {
+            topBanner.view.backgroundColor = backgroundColor
+        }
+        if let primaryTextColor = currentTopBannerPrimaryTextColor {
+            topBanner.instructionsBannerView.primaryLabel.textColor = primaryTextColor
+        }
+        if let secondaryTextColor = currentTopBannerSecondaryTextColor {
+            topBanner.instructionsBannerView.secondaryLabel.textColor = secondaryTextColor
+        }
+        if let distanceTextColor = currentTopBannerDistanceTextColor {
+            topBanner.instructionsBannerView.distanceLabel.textColor = distanceTextColor
+        }
+        if let separatorColor = currentTopBannerSeparatorColor {
+            topBanner.instructionsBannerView.separatorView.backgroundColor = separatorColor
+        }
 
         let bottomBanner = BottomBannerViewController()
-        bottomBanner.view.backgroundColor = bottomBannerBackgroundColor ?? UIColor(hex: "#FFFFFF")
         bottomBanner.distanceFormatter.locale = currentLocale
         bottomBanner.dateFormatter.locale = currentLocale
+
+        // Apply bottom banner colors
+        if let backgroundColor = currentBottomBannerBackgroundColor {
+            bottomBanner.view.backgroundColor = backgroundColor
+        }
+        if let timeRemainingColor = currentBottomBannerTimeRemainingTextColor {
+            bottomBanner.timeRemainingLabel.textColor = timeRemainingColor
+        }
+        if let distanceRemainingColor = currentBottomBannerDistanceRemainingTextColor {
+            bottomBanner.distanceRemainingLabel.textColor = distanceRemainingColor
+        }
+        if let arrivalTimeColor = currentBottomBannerArrivalTimeTextColor {
+            bottomBanner.arrivalTimeLabel.textColor = arrivalTimeColor
+        }
 
         let navigationOptions = NavigationOptions(
             mapboxNavigation: self.mapboxNavigation!,
             voiceController: ExpoMapboxNavigationViewController.navigationProvider.routeVoiceController,
             eventsManager: ExpoMapboxNavigationViewController.navigationProvider.eventsManager(),
-            styles: nil,
             topBanner: topBanner,
-            bottomBanner: bottomBanner,
-            predictiveCacheManager: nil,
-            navigationMapView: nil
+            bottomBanner: bottomBanner
         )
 
         let navigationViewController = NavigationViewController(
@@ -421,89 +376,20 @@ class ExpoMapboxNavigationViewController: UIViewController {
             navigationOptions: navigationOptions
         )
 
-        let navigationView = navigationViewController.navigationView
-
-        // 1. Instructions Banner (Top Banner)
-        let instructionsBanner = navigationView.instructionsBannerView
-        instructionsBanner.backgroundColor = topBannerBackgroundColor ?? UIColor(hex: "#FFFFFF")
-        instructionsBanner.primaryLabel.textColor = topBannerPrimaryTextColor ?? UIColor(hex: "#000000")
-        instructionsBanner.secondaryLabel.textColor = topBannerSecondaryTextColor ?? UIColor(hex: "#666666")
-        instructionsBanner.distanceLabel.textColor = topBannerDistanceTextColor ?? UIColor(hex: "#666666")
-        instructionsBanner.separatorView.backgroundColor = topBannerSeparatorColor ?? UIColor(hex: "#EEEEEE")
-
-        // 2. Information Stack
-        let informationStack = navigationView.informationStackView
-        informationStack.backgroundColor = informationStackBackgroundColor ?? UIColor(hex: "#FFFFFF")
-        for view in informationStack.arrangedSubviews {
-            if let label = view as? UILabel {
-                label.textColor = informationStackTextColor ?? UIColor(hex: "#000000")
-            }
-        }
-
-        // 3. Bottom Banner
-        let bottomBanner = navigationView.bottomBannerView
-        bottomBanner.backgroundColor = bottomBannerBackgroundColor ?? UIColor(hex: "#FFFFFF")
-        bottomBanner.timeRemainingLabel.textColor = bottomBannerTimeRemainingTextColor ?? UIColor(hex: "#000000")
-        bottomBanner.distanceRemainingLabel.textColor = bottomBannerDistanceRemainingTextColor ?? UIColor(hex: "#666666")
-        bottomBanner.arrivalTimeLabel.textColor = bottomBannerArrivalTimeTextColor ?? UIColor(hex: "#666666")
-
-        // 4. Resume Button
-        let resumeButton = navigationView.resumeButton
-        resumeButton.backgroundColor = resumeButtonBackgroundColor ?? UIColor(hex: "#FFFFFF")
-        resumeButton.setTitleColor(resumeButtonTextColor ?? UIColor(hex: "#000000"), for: .normal)
-
-        // 5. Speed Limit View
-        let speedLimitView = navigationView.speedLimitView
-        speedLimitView.backgroundColor = speedLimitBackgroundColor ?? UIColor(hex: "#FFFFFF")
-        if let speedLabel = speedLimitView.valueLabel {
-            speedLabel.textColor = speedLimitTextColor ?? UIColor(hex: "#000000")
-        }
-
-        // 6. Floating Stack
-        let floatingStack = navigationView.floatingStackView
-        floatingStack.backgroundColor = floatingStackBackgroundColor ?? UIColor(hex: "#FFFFFF")
-        for button in floatingStack.arrangedSubviews {
-            if let floatingButton = button as? UIButton {
-                floatingButton.backgroundColor = floatingButtonsBackgroundColor ?? UIColor(hex: "#FFFFFF")
-            }
-        }
-
-        // 7. Navigation Map
         let navigationMapView = navigationViewController.navigationMapView
-        navigationMapView.puckType = .puck2D(.navigationDefault)
+        navigationMapView!.puckType = .puck2D(.navigationDefault)
 
         let style = currentMapStyle != nil ? StyleURI(rawValue: currentMapStyle!) : StyleURI.streets
-        navigationMapView.mapView.mapboxMap.loadStyle(style!, completion: { _ in
-            navigationMapView.localizeLabels(locale: self.currentLocale)
-            do {
-                try navigationMapView.mapView.mapboxMap.localizeLabels(into: self.currentLocale)
+        navigationMapView!.mapView.mapboxMap.loadStyle(style!, completion: { _ in
+            navigationMapView!.localizeLabels(locale: self.currentLocale)
+            do{
+                try navigationMapView!.mapView.mapboxMap.localizeLabels(into: self.currentLocale)
             } catch {}
         })
+ 
 
-        // Apply map colors
-        if let routeColor = currentRouteColor {
-            navigationMapView.routeColor = routeColor
-        }
-        if let alternateColor = currentRouteAlternateColor {
-            navigationMapView.routeAlternateColor = alternateColor
-        }
-        if let casingColor = currentRouteCasingColor {
-            navigationMapView.routeCasingColor = casingColor
-        }
-        if let alternateCasingColor = currentRouteAlternateCasingColor {
-            navigationMapView.routeAlternateCasingColor = alternateCasingColor
-        }
-        if let traversedColor = currentTraversedRouteColor {
-            navigationMapView.traversedRouteColor = traversedColor
-        }
-        if let arrowColor = currentManeuverArrowColor {
-            navigationMapView.maneuverArrowColor = arrowColor
-        }
-
-        // 8. Way Name Label
-        let wayNameView = navigationView.wayNameView
-        wayNameView.backgroundColor = wayNameViewBackgroundColor ?? UIColor(hex: "#FFFFFF")
-        wayNameView.valueLabel.textColor = wayNameViewTextColor ?? UIColor(hex: "#000000")
+        let cancelButton = navigationViewController.navigationView.bottomBannerContainerView.findViews(subclassOf: CancelButton.self)[0]
+        cancelButton.addTarget(self, action: #selector(cancelButtonClicked), for: .touchUpInside)
 
         navigationViewController.delegate = self
         addChild(navigationViewController)
@@ -515,8 +401,28 @@ class ExpoMapboxNavigationViewController: UIViewController {
             navigationViewController.view.topAnchor.constraint(equalTo: view.topAnchor, constant: 0),
             navigationViewController.view.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: 0),
         ])
-        navigationViewController.didMove(toParent: self)
+        didMove(toParent: self)
         mapboxNavigation!.tripSession().startActiveGuidance(with: navigationRoutes, startLegIndex: 0)
+    
+        // Apply custom colors if set
+        if let routeColor = currentRouteColor {
+            navigationMapView?.routeColor = routeColor
+        }
+        if let alternateColor = currentRouteAlternateColor {
+            navigationMapView?.routeAlternateColor = alternateColor
+        }
+        if let casingColor = currentRouteCasingColor {
+            navigationMapView?.routeCasingColor = casingColor
+        }
+        if let alternateCasingColor = currentRouteAlternateCasingColor {
+            navigationMapView?.routeAlternateCasingColor = alternateCasingColor
+        }
+        if let traversedColor = currentTraversedRouteColor {
+            navigationMapView?.traversedRouteColor = traversedColor
+        }
+        if let arrowColor = currentManeuverArrowColor {
+            navigationMapView?.maneuverArrowColor = arrowColor
+        }
     }
 }
 extension ExpoMapboxNavigationViewController: NavigationViewControllerDelegate {
