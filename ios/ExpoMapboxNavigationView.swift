@@ -236,19 +236,23 @@ class ExpoMapboxNavigationViewController: UIViewController {
     }
 
     func setTopBannerBackgroundColor(hexColor: String) {
-        currentTopBannerBackgroundColor = UIColor(hex: hexColor)
+        customDayStyle.customTopBannerBackgroundColor = UIColor(hex: hexColor)
+        update()
     }
 
     func setTopBannerPrimaryTextColor(hexColor: String) {
-        currentTopBannerPrimaryTextColor = UIColor(hex: hexColor)
+        customDayStyle.customTopBannerPrimaryTextColor = UIColor(hex: hexColor)
+        update()
     }
 
     func setTopBannerSecondaryTextColor(hexColor: String) {
-        currentTopBannerSecondaryTextColor = UIColor(hex: hexColor)
+        customDayStyle.customTopBannerSecondaryTextColor = UIColor(hex: hexColor)
+        update()
     }
 
     func setTopBannerDistanceTextColor(hexColor: String) {
-        currentTopBannerDistanceTextColor = UIColor(hex: hexColor)
+        customDayStyle.customTopBannerDistanceTextColor = UIColor(hex: hexColor)
+        update()
     }
 
     func setTopBannerSeparatorColor(hexColor: String) {
@@ -261,17 +265,17 @@ class ExpoMapboxNavigationViewController: UIViewController {
     }
 
     func setBottomBannerTimeRemainingTextColor(hexColor: String) {
-        currentBottomBannerTimeRemainingTextColor = UIColor(hex: hexColor)
+        customDayStyle.customBottomBannerTimeRemainingTextColor = UIColor(hex: hexColor)
         update()
     }
 
     func setBottomBannerDistanceRemainingTextColor(hexColor: String) {
-        currentBottomBannerDistanceRemainingTextColor = UIColor(hex: hexColor)
+        customDayStyle.customBottomBannerDistanceRemainingTextColor = UIColor(hex: hexColor)
         update()
     }
 
     func setBottomBannerArrivalTimeTextColor(hexColor: String) {
-        currentBottomBannerArrivalTimeTextColor = UIColor(hex: hexColor)
+        customDayStyle.customBottomBannerArrivalTimeTextColor = UIColor(hex: hexColor)
         update()
     }
 
@@ -291,7 +295,17 @@ class ExpoMapboxNavigationViewController: UIViewController {
     }
 
     func setFloatingButtonsBackgroundColor(hexColor: String) {
-        currentFloatingButtonsBackgroundColor = UIColor(hex: hexColor)
+        customDayStyle.customFloatingButtonsBackgroundColor = UIColor(hex: hexColor)
+        update()
+    }
+
+    func setFloatingButtonsTextColor(hexColor: String) {
+        customDayStyle.customFloatingButtonsTextColor = UIColor(hex: hexColor)
+        update()
+    }
+
+    func setFloatingButtonsBorderColor(hexColor: String) {
+        customDayStyle.customFloatingButtonsBorderColor = UIColor(hex: hexColor)
         update()
     }
 
@@ -311,12 +325,17 @@ class ExpoMapboxNavigationViewController: UIViewController {
     }
 
     func setResumeButtonBackgroundColor(hexColor: String) {
-        currentResumeButtonBackgroundColor = UIColor(hex: hexColor)
+        customDayStyle.customResumeButtonBackgroundColor = UIColor(hex: hexColor)
         update()
     }
 
     func setResumeButtonTextColor(hexColor: String) {
-        currentResumeButtonTextColor = UIColor(hex: hexColor)
+        customDayStyle.customResumeButtonTextColor = UIColor(hex: hexColor)
+        update()
+    }
+
+    func setResumeButtonBorderColor(hexColor: String) {
+        customDayStyle.customResumeButtonBorderColor = UIColor(hex: hexColor)
         update()
     }
 
@@ -394,40 +413,9 @@ class ExpoMapboxNavigationViewController: UIViewController {
         let topBanner = TopBannerViewController()
         topBanner.instructionsBannerView.distanceFormatter.locale = currentLocale
         
-        // Apply top banner colors
-        if let backgroundColor = currentTopBannerBackgroundColor {
-            topBanner.view.backgroundColor = backgroundColor
-        }
-        if let primaryTextColor = currentTopBannerPrimaryTextColor {
-            topBanner.instructionsBannerView.primaryLabel.textColor = primaryTextColor
-        }
-        if let secondaryTextColor = currentTopBannerSecondaryTextColor {
-            topBanner.instructionsBannerView.secondaryLabel.textColor = secondaryTextColor
-        }
-        if let distanceTextColor = currentTopBannerDistanceTextColor {
-            topBanner.instructionsBannerView.distanceLabel.textColor = distanceTextColor
-        }
-        if let separatorColor = currentTopBannerSeparatorColor {
-            topBanner.instructionsBannerView.separatorView.backgroundColor = separatorColor
-        }
-
         let bottomBanner = BottomBannerViewController()
         bottomBanner.distanceFormatter.locale = currentLocale
         bottomBanner.dateFormatter.locale = currentLocale
-
-        // Apply bottom banner colors
-        if let backgroundColor = currentBottomBannerBackgroundColor {
-            bottomBanner.view.backgroundColor = backgroundColor
-        }
-        if let timeRemainingColor = currentBottomBannerTimeRemainingTextColor {
-            bottomBanner.timeRemainingLabel.textColor = timeRemainingColor
-        }
-        if let distanceRemainingColor = currentBottomBannerDistanceRemainingTextColor {
-            bottomBanner.distanceRemainingLabel.textColor = distanceRemainingColor
-        }
-        if let arrivalTimeColor = currentBottomBannerArrivalTimeTextColor {
-            bottomBanner.arrivalTimeLabel.textColor = arrivalTimeColor
-        }
 
         let navigationOptions = NavigationOptions(
             mapboxNavigation: self.mapboxNavigation!,

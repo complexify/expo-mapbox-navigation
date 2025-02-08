@@ -53,6 +53,7 @@ export type ExpoMapboxNavigationViewProps = {
   // Resume Button (4)
   resumeButtonBackgroundColor?: string;
   resumeButtonTextColor?: string;
+  resumeButtonBorderColor?: string;
 
   // Speed Limit View (5)
   speedLimitBackgroundColor?: string;
@@ -62,6 +63,8 @@ export type ExpoMapboxNavigationViewProps = {
   // Floating Stack (6)
   floatingStackBackgroundColor?: string;
   floatingButtonsBackgroundColor?: string;
+  floatingButtonsTextColor?: string;
+  floatingButtonsBorderColor?: string;
 
   // Way Name Label (8)
   wayNameViewBackgroundColor?: string;

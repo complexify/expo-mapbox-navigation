@@ -162,6 +162,18 @@ public class ExpoMapboxNavigationModule: Module {
           }
       }
 
+      Prop("floatingButtonsTextColor") { (view: ExpoMapboxNavigationView, color: String?) in
+          if let hexColor = color {
+              view.controller.setFloatingButtonsTextColor(hexColor: hexColor)
+          }
+      }
+
+      Prop("floatingButtonsBorderColor") { (view: ExpoMapboxNavigationView, color: String?) in
+          if let hexColor = color {
+              view.controller.setFloatingButtonsBorderColor(hexColor: hexColor)
+          }
+      }
+
       Prop("speedLimitBackgroundColor") { (view: ExpoMapboxNavigationView, color: String?) in
           if let hexColor = color {
               view.controller.setSpeedLimitBackgroundColor(hexColor: hexColor)
