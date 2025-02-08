@@ -97,31 +97,16 @@ class CustomDayStyle: StandardDayStyle {
         // Floating buttons customization
         if let floatingBgColor = customFloatingButtonsBackgroundColor {
             FloatingButton.appearance(for: traitCollection).backgroundColor = floatingBgColor
-            OverviewButton.appearance(for: traitCollection).backgroundColor = floatingBgColor
-            MuteButton.appearance(for: traitCollection).backgroundColor = floatingBgColor
-            FeedbackButton.appearance(for: traitCollection).backgroundColor = floatingBgColor
         }
         if let floatingTextColor = customFloatingButtonsTextColor {
             FloatingButton.appearance(for: traitCollection).tintColor = floatingTextColor
-            OverviewButton.appearance(for: traitCollection).tintColor = floatingTextColor
-            MuteButton.appearance(for: traitCollection).tintColor = floatingTextColor
-            FeedbackButton.appearance(for: traitCollection).tintColor = floatingTextColor
         }
         if let floatingBorderColor = customFloatingButtonsBorderColor {
             FloatingButton.appearance(for: traitCollection).borderColor = floatingBorderColor
-            OverviewButton.appearance(for: traitCollection).borderColor = floatingBorderColor
-            MuteButton.appearance(for: traitCollection).borderColor = floatingBorderColor
-            FeedbackButton.appearance(for: traitCollection).borderColor = floatingBorderColor
         }
         
         // Set default values for floating buttons
         FloatingButton.appearance(for: traitCollection).borderWidth = 1.0
         FloatingButton.appearance(for: traitCollection).cornerRadius = 4.0
-        OverviewButton.appearance(for: traitCollection).borderWidth = 1.0
-        OverviewButton.appearance(for: traitCollection).cornerRadius = 4.0
-        MuteButton.appearance(for: traitCollection).borderWidth = 1.0
-        MuteButton.appearance(for: traitCollection).cornerRadius = 4.0
-        FeedbackButton.appearance(for: traitCollection).borderWidth = 1.0
-        FeedbackButton.appearance(for: traitCollection).cornerRadius = 4.0
     }
 }
