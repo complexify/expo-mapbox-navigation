@@ -4,7 +4,6 @@ import MapboxMaps
 import MapboxNavigationUIKit
 import MapboxDirections
 import Combine
-import CustomNavigationStyle
 
 
 class ExpoMapboxNavigationView: ExpoView {
@@ -19,7 +18,6 @@ class ExpoMapboxNavigationView: ExpoView {
     let controller = ExpoMapboxNavigationViewController()
 
     let customDayStyle = CustomDayStyle()
-    let customNightStyle = CustomNightStyle()
 
     required init(appContext: AppContext? = nil) {
         super.init(appContext: appContext)
@@ -438,7 +436,7 @@ class ExpoMapboxNavigationViewController: UIViewController {
         }
 
         let navigationOptions = NavigationOptions(
-            styles: [customDayStyle, customNightStyle],
+            styles: [customDayStyle],
             mapboxNavigation: self.mapboxNavigation!,
             voiceController: ExpoMapboxNavigationViewController.navigationProvider.routeVoiceController,
             eventsManager: ExpoMapboxNavigationViewController.navigationProvider.eventsManager(),
