@@ -4,6 +4,7 @@ import MapboxMaps
 import MapboxNavigationUIKit
 import MapboxDirections
 import Combine
+import CustomNavigationStyle
 
 
 class ExpoMapboxNavigationView: ExpoView {
@@ -16,6 +17,8 @@ class ExpoMapboxNavigationView: ExpoView {
     private let onRoutesLoaded = EventDispatcher()
 
     let controller = ExpoMapboxNavigationViewController()
+
+    let customStyle = CustomNavigationStyle()
 
     required init(appContext: AppContext? = nil) {
         super.init(appContext: appContext)
@@ -255,19 +258,23 @@ class ExpoMapboxNavigationViewController: UIViewController {
     }
 
     func setBottomBannerBackgroundColor(hexColor: String) {
-        currentBottomBannerBackgroundColor = UIColor(hex: hexColor)
+        customStyle.bottomBannerBackgroundColor = UIColor(hex: hexColor)
+        update()
     }
 
     func setBottomBannerTimeRemainingTextColor(hexColor: String) {
         currentBottomBannerTimeRemainingTextColor = UIColor(hex: hexColor)
+        update()
     }
 
     func setBottomBannerDistanceRemainingTextColor(hexColor: String) {
         currentBottomBannerDistanceRemainingTextColor = UIColor(hex: hexColor)
+        update()
     }
 
     func setBottomBannerArrivalTimeTextColor(hexColor: String) {
         currentBottomBannerArrivalTimeTextColor = UIColor(hex: hexColor)
+        update()
     }
 
     func setInformationStackBackgroundColor(hexColor: String) {
@@ -287,37 +294,42 @@ class ExpoMapboxNavigationViewController: UIViewController {
 
     func setFloatingButtonsBackgroundColor(hexColor: String) {
         currentFloatingButtonsBackgroundColor = UIColor(hex: hexColor)
-        // Apply color in onRoutesCalculated
+        update()
     }
 
     func setSpeedLimitBackgroundColor(hexColor: String) {
-        currentSpeedLimitBackgroundColor = UIColor(hex: hexColor)
-        // Apply color in onRoutesCalculated
+        customStyle.speedLimitBackgroundColor = UIColor(hex: hexColor)
+        update()
     }
 
     func setSpeedLimitTextColor(hexColor: String) {
-        currentSpeedLimitTextColor = UIColor(hex: hexColor)
-        // Apply color in onRoutesCalculated
+        customStyle.speedLimitTextColor = UIColor(hex: hexColor)
+        update()
     }
 
     func setWayNameViewBackgroundColor(hexColor: String) {
-        currentWayNameViewBackgroundColor = UIColor(hex: hexColor)
-        // Apply color in onRoutesCalculated
+        customStyle.wayNameBackgroundColor = UIColor(hex: hexColor)
+        update()
     }
 
     func setWayNameViewTextColor(hexColor: String) {
-        currentWayNameViewTextColor = UIColor(hex: hexColor)
-        // Apply color in onRoutesCalculated
+        customStyle.wayNameTextColor = UIColor(hex: hexColor)
+        update()
     }
 
     func setResumeButtonBackgroundColor(hexColor: String) {
         currentResumeButtonBackgroundColor = UIColor(hex: hexColor)
-        // Apply color in onRoutesCalculated
+        update()
     }
 
     func setResumeButtonTextColor(hexColor: String) {
         currentResumeButtonTextColor = UIColor(hex: hexColor)
-        // Apply color in onRoutesCalculated
+        update()
+    }
+
+    func setSpeedLimitBorderColor(hexColor: String) {
+        customStyle.speedLimitBorderColor = UIColor(hex: hexColor)
+        update()
     }
 
     func update(){
@@ -383,7 +395,7 @@ class ExpoMapboxNavigationViewController: UIViewController {
         onCancelNavigation?()
     }
 
-    func onRoutesCalculated(navigationRoutes: NavigationRoutes){
+    func onRoutesCalculated(navigationRoutes: NavigationRoutes) {
         onRoutesLoaded?()
 
         let topBanner = TopBannerViewController()
@@ -425,6 +437,7 @@ class ExpoMapboxNavigationViewController: UIViewController {
         }
 
         let navigationOptions = NavigationOptions(
+            styles: [customStyle],
             mapboxNavigation: self.mapboxNavigation!,
             voiceController: ExpoMapboxNavigationViewController.navigationProvider.routeVoiceController,
             eventsManager: ExpoMapboxNavigationViewController.navigationProvider.eventsManager(),
@@ -484,19 +497,6 @@ class ExpoMapboxNavigationViewController: UIViewController {
         if let arrowColor = currentManeuverArrowColor {
             navigationMapView?.maneuverArrowColor = arrowColor
         }
-
-        // Apply custom colors to UI elements
-        if let backgroundColor = currentInformationStackBackgroundColor {
-            // Apply to information stack background
-            navigationViewController.navigationView.informationStackView?.backgroundColor = backgroundColor
-        }
-
-        if let textColor = currentInformationStackTextColor {
-            // Apply to information stack text
-            navigationViewController.navigationView.informationStackView?.tintColor = textColor
-        }
-
-        // Apply other custom colors similarly...
     }
 }
 extension ExpoMapboxNavigationViewController: NavigationViewControllerDelegate {

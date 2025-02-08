@@ -197,6 +197,12 @@ public class ExpoMapboxNavigationModule: Module {
               view.controller.setResumeButtonTextColor(hexColor: hexColor)
           }
       }
+
+      Prop("speedLimitBorderColor") { (view: ExpoMapboxNavigationView, color: String?) in
+          if let hexColor = color {
+              view.controller.setSpeedLimitBorderColor(hexColor: hexColor)
+          }
+      }
     }
   }
 }

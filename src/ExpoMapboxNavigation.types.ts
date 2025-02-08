@@ -1,4 +1,4 @@
-import { ViewStyle, StyleProp } from "react-native/types";
+import { ViewStyle, StyleProp } from "react-native";
 
 type ProgressEvent = {
   distanceRemaining: number;
@@ -57,6 +57,7 @@ export type ExpoMapboxNavigationViewProps = {
   // Speed Limit View (5)
   speedLimitBackgroundColor?: string;
   speedLimitTextColor?: string;
+  speedLimitBorderColor?: string;
 
   // Floating Stack (6)
   floatingStackBackgroundColor?: string;
