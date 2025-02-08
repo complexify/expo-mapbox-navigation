@@ -8,7 +8,6 @@ class CustomDayStyle: StandardDayStyle {
     var customSpeedLimitBackgroundColor: UIColor?
     var customSpeedLimitBorderColor: UIColor?
     var customBottomBannerBackgroundColor: UIColor?
-    var customWayNameTextColor: UIColor?
     var customWayNameBackgroundColor: UIColor?
     
     required init() {
@@ -37,10 +36,6 @@ class CustomDayStyle: StandardDayStyle {
             BottomBannerView.appearance(for: traitCollection).backgroundColor = bottomBannerBg
         }
         
-        // Way name customization
-        if let textColor = customWayNameTextColor {
-            WayNameView.appearance(for: traitCollection).textColor = textColor
-        }
         if let bgColor = customWayNameBackgroundColor {
             WayNameView.appearance(for: traitCollection).backgroundColor = bgColor.withAlphaComponent(0.8)
         }

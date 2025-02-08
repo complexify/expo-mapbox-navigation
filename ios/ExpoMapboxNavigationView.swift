@@ -17,8 +17,6 @@ class ExpoMapboxNavigationView: ExpoView {
 
     let controller = ExpoMapboxNavigationViewController()
 
-    let customDayStyle = CustomDayStyle()
-
     required init(appContext: AppContext? = nil) {
         super.init(appContext: appContext)
         clipsToBounds = true
@@ -93,9 +91,10 @@ class ExpoMapboxNavigationViewController: UIViewController {
     var currentSpeedLimitBackgroundColor: UIColor?
     var currentSpeedLimitTextColor: UIColor?
     var currentWayNameViewBackgroundColor: UIColor?
-    var currentWayNameViewTextColor: UIColor?
     var currentResumeButtonBackgroundColor: UIColor?
     var currentResumeButtonTextColor: UIColor?
+
+    let customDayStyle = CustomDayStyle()
 
     init() {
         super.init(nibName: nil, bundle: nil)
@@ -311,11 +310,6 @@ class ExpoMapboxNavigationViewController: UIViewController {
         update()
     }
 
-    func setWayNameViewTextColor(hexColor: String) {
-        customDayStyle.customWayNameTextColor = UIColor(hex: hexColor)
-        update()
-    }
-
     func setResumeButtonBackgroundColor(hexColor: String) {
         currentResumeButtonBackgroundColor = UIColor(hex: hexColor)
         update()
@@ -436,10 +430,10 @@ class ExpoMapboxNavigationViewController: UIViewController {
         }
 
         let navigationOptions = NavigationOptions(
-            styles: [customDayStyle],
             mapboxNavigation: self.mapboxNavigation!,
             voiceController: ExpoMapboxNavigationViewController.navigationProvider.routeVoiceController,
             eventsManager: ExpoMapboxNavigationViewController.navigationProvider.eventsManager(),
+            styles: [customDayStyle],
             topBanner: topBanner,
             bottomBanner: bottomBanner
         )

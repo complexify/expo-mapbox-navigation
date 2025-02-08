@@ -180,12 +180,6 @@ public class ExpoMapboxNavigationModule: Module {
           }
       }
 
-      Prop("wayNameViewTextColor") { (view: ExpoMapboxNavigationView, color: String?) in
-          if let hexColor = color {
-              view.controller.setWayNameViewTextColor(hexColor: hexColor)
-          }
-      }
-
       Prop("resumeButtonBackgroundColor") { (view: ExpoMapboxNavigationView, color: String?) in
           if let hexColor = color {
               view.controller.setResumeButtonBackgroundColor(hexColor: hexColor)

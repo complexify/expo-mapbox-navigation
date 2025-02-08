@@ -65,5 +65,4 @@ export type ExpoMapboxNavigationViewProps = {
 
   // Way Name Label (8)
   wayNameViewBackgroundColor?: string;
-  wayNameViewTextColor?: string;
 };
