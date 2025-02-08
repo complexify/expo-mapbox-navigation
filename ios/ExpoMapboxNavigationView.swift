@@ -18,7 +18,8 @@ class ExpoMapboxNavigationView: ExpoView {
 
     let controller = ExpoMapboxNavigationViewController()
 
-    let customStyle = CustomNavigationStyle()
+    let customDayStyle = CustomDayStyle()
+    let customNightStyle = CustomNightStyle()
 
     required init(appContext: AppContext? = nil) {
         super.init(appContext: appContext)
@@ -258,7 +259,7 @@ class ExpoMapboxNavigationViewController: UIViewController {
     }
 
     func setBottomBannerBackgroundColor(hexColor: String) {
-        customStyle.bottomBannerBackgroundColor = UIColor(hex: hexColor)
+        customDayStyle.customBottomBannerBackgroundColor = UIColor(hex: hexColor)
         update()
     }
 
@@ -298,22 +299,22 @@ class ExpoMapboxNavigationViewController: UIViewController {
     }
 
     func setSpeedLimitBackgroundColor(hexColor: String) {
-        customStyle.speedLimitBackgroundColor = UIColor(hex: hexColor)
+        customDayStyle.customSpeedLimitBackgroundColor = UIColor(hex: hexColor)
         update()
     }
 
     func setSpeedLimitTextColor(hexColor: String) {
-        customStyle.speedLimitTextColor = UIColor(hex: hexColor)
+        customDayStyle.customSpeedLimitTextColor = UIColor(hex: hexColor)
         update()
     }
 
     func setWayNameViewBackgroundColor(hexColor: String) {
-        customStyle.wayNameBackgroundColor = UIColor(hex: hexColor)
+        customDayStyle.customWayNameBackgroundColor = UIColor(hex: hexColor)
         update()
     }
 
     func setWayNameViewTextColor(hexColor: String) {
-        customStyle.wayNameTextColor = UIColor(hex: hexColor)
+        customDayStyle.customWayNameTextColor = UIColor(hex: hexColor)
         update()
     }
 
@@ -328,7 +329,7 @@ class ExpoMapboxNavigationViewController: UIViewController {
     }
 
     func setSpeedLimitBorderColor(hexColor: String) {
-        customStyle.speedLimitBorderColor = UIColor(hex: hexColor)
+        customDayStyle.customSpeedLimitBorderColor = UIColor(hex: hexColor)
         update()
     }
 
@@ -437,7 +438,7 @@ class ExpoMapboxNavigationViewController: UIViewController {
         }
 
         let navigationOptions = NavigationOptions(
-            styles: [customStyle],
+            styles: [customDayStyle, customNightStyle],
             mapboxNavigation: self.mapboxNavigation!,
             voiceController: ExpoMapboxNavigationViewController.navigationProvider.routeVoiceController,
             eventsManager: ExpoMapboxNavigationViewController.navigationProvider.eventsManager(),

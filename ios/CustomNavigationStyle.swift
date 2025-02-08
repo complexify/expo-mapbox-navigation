@@ -1,13 +1,15 @@
-import MapboxNavigation
+import Foundation
+import MapboxMaps
+import MapboxNavigationUIKit
 import UIKit
 
-class CustomNavigationStyle: DayStyle {
-    var speedLimitTextColor: UIColor?
-    var speedLimitBackgroundColor: UIColor?
-    var speedLimitBorderColor: UIColor?
-    var bottomBannerBackgroundColor: UIColor?
-    var wayNameTextColor: UIColor?
-    var wayNameBackgroundColor: UIColor?
+class CustomDayStyle: StandardDayStyle {
+    var customSpeedLimitTextColor: UIColor?
+    var customSpeedLimitBackgroundColor: UIColor?
+    var customSpeedLimitBorderColor: UIColor?
+    var customBottomBannerBackgroundColor: UIColor?
+    var customWayNameTextColor: UIColor?
+    var customWayNameBackgroundColor: UIColor?
     
     required init() {
         super.init()
@@ -17,28 +19,30 @@ class CustomNavigationStyle: DayStyle {
     override func apply() {
         super.apply()
         
+        let traitCollection = UIScreen.main.traitCollection
+        
         // Speed limit customization
-        if let textColor = speedLimitTextColor {
-            SpeedLimitView.appearance().textColor = textColor
+        if let textColor = customSpeedLimitTextColor {
+            SpeedLimitView.appearance(for: traitCollection).textColor = textColor
         }
-        if let bgColor = speedLimitBackgroundColor {
-            SpeedLimitView.appearance().signBackColor = bgColor
+        if let bgColor = customSpeedLimitBackgroundColor {
+            SpeedLimitView.appearance(for: traitCollection).signBackColor = bgColor
         }
-        if let borderColor = speedLimitBorderColor {
-            SpeedLimitView.appearance().regulatoryBorderColor = borderColor
+        if let borderColor = customSpeedLimitBorderColor {
+            SpeedLimitView.appearance(for: traitCollection).regulatoryBorderColor = borderColor
         }
         
         // Bottom banner customization
-        if let bottomBannerBg = bottomBannerBackgroundColor {
-            BottomBannerView.appearance().backgroundColor = bottomBannerBg
+        if let bottomBannerBg = customBottomBannerBackgroundColor {
+            BottomBannerView.appearance(for: traitCollection).backgroundColor = bottomBannerBg
         }
         
         // Way name customization
-        if let textColor = wayNameTextColor {
-            WayNameView.appearance().textColor = textColor
+        if let textColor = customWayNameTextColor {
+            WayNameView.appearance(for: traitCollection).textColor = textColor
         }
-        if let bgColor = wayNameBackgroundColor {
-            WayNameView.appearance().backgroundColor = bgColor.withAlphaComponent(0.8)
+        if let bgColor = customWayNameBackgroundColor {
+            WayNameView.appearance(for: traitCollection).backgroundColor = bgColor.withAlphaComponent(0.8)
         }
     }
-} 
+}
