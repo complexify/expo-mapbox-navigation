@@ -74,4 +74,8 @@ export type ExpoMapboxNavigationViewProps = {
   maneuverViewSecondaryColor?: string;  // Secondary arrow color
   maneuverViewTextColor?: string;       // Direction text color
   maneuverViewBackgroundColor?: string; // Background of the direction bar
+
+  // Instructions View
+  instructionsTextColor?: string;       // Color for all instruction text
+  instructionsBackgroundColor?: string; // Background color for instruction panels
 };

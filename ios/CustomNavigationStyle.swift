@@ -115,21 +115,48 @@ class CustomDayStyle: StandardDayStyle {
         FloatingButton.appearance(for: traitCollection).borderWidth = 1.0
         FloatingButton.appearance(for: traitCollection).cornerRadius = 4.0
         
-        // Top Banner - Current Direction Bar (ManeuverView)
+        // Maneuver View (Top Banner Direction Arrow and Text)
         if let primaryColor = customManeuverViewPrimaryColor {
+            // Main direction arrow color
             ManeuverView.appearance(for: traitCollection).primaryColor = primaryColor
-        }
-        if let secondaryColor = customManeuverViewSecondaryColor {
-            ManeuverView.appearance(for: traitCollection).secondaryColor = secondaryColor
+            // Also apply to the small direction icon in the top banner
+            ManeuverArrowView.appearance(for: traitCollection).tintColor = primaryColor
         }
         
-        // Current Direction Background and Text
+        // Current step instruction styling (the white bar with road name)
         if let bgColor = customManeuverViewBackgroundColor {
+            // The white background bar
+            InstructionsBannerView.appearance(for: traitCollection).backgroundColor = bgColor
+            // The small direction preview also needs this background
             ManeuverView.appearance(for: traitCollection).backgroundColor = bgColor
         }
+        
+        // Text colors for the current instruction
         if let textColor = customManeuverViewTextColor {
-            StepInstructionsView.appearance(for: traitCollection).primaryLabel.textColor = textColor
-            StepInstructionsView.appearance(for: traitCollection).secondaryLabel.textColor = textColor
+            // Main instruction text (e.g., "Simonton Road")
+            InstructionLabel.appearance(for: traitCollection).textColor = textColor
+            // Distance text (e.g., "250 ft")
+            NextBannerView.appearance(for: traitCollection).distanceLabel.textColor = textColor
+            // Street name in the banner
+            NextBannerView.appearance(for: traitCollection).primaryLabel.textColor = textColor
+            // Additional instructions
+            NextBannerView.appearance(for: traitCollection).secondaryLabel.textColor = textColor
+        }
+        
+        // Steps list styling (the drop-down view with all directions)
+        if let textColor = customManeuverViewTextColor {
+            // Step instructions text
+            StepsTableViewCell.appearance(for: traitCollection).primaryLabel.textColor = textColor
+            StepsTableViewCell.appearance(for: traitCollection).secondaryLabel.textColor = textColor
+            // Distance for each step
+            StepsTableViewCell.appearance(for: traitCollection).distanceLabel.textColor = textColor
+        }
+        
+        if let bgColor = customManeuverViewBackgroundColor {
+            // Background of each step in the list
+            StepsTableViewCell.appearance(for: traitCollection).backgroundColor = bgColor
+            // Background of the entire steps list
+            StepsViewController.appearance(for: traitCollection).view.backgroundColor = bgColor
         }
     }
 }
