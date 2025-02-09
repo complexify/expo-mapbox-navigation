@@ -58,8 +58,6 @@ class CustomDayStyle: StandardDayStyle {
         // Bottom banner text colors
         if let timeRemainingColor = customBottomBannerTimeRemainingTextColor {
             TimeRemainingLabel.appearance(for: traitCollection).textColor = timeRemainingColor
-            TimeRemainingLabel.appearance(for: traitCollection).valueTextColor = timeRemainingColor
-            TimeRemainingLabel.appearance(for: traitCollection).unitTextColor = timeRemainingColor
         }
         if let distanceRemainingColor = customBottomBannerDistanceRemainingTextColor {
             DistanceRemainingLabel.appearance(for: traitCollection).textColor = distanceRemainingColor
