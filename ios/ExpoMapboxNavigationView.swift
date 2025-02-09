@@ -344,6 +344,26 @@ class ExpoMapboxNavigationViewController: UIViewController {
         update()
     }
 
+    func setManeuverViewPrimaryColor(hexColor: String) {
+        customDayStyle.customManeuverViewPrimaryColor = UIColor(hex: hexColor)
+        update()
+    }
+
+    func setManeuverViewSecondaryColor(hexColor: String) {
+        customDayStyle.customManeuverViewSecondaryColor = UIColor(hex: hexColor)
+        update()
+    }
+
+    func setManeuverViewTextColor(hexColor: String) {
+        customDayStyle.customManeuverViewTextColor = UIColor(hex: hexColor)
+        update()
+    }
+
+    func setManeuverViewBackgroundColor(hexColor: String) {
+        customDayStyle.customManeuverViewBackgroundColor = UIColor(hex: hexColor)
+        update()
+    }
+
     func update(){
         calculateRoutesTask?.cancel()
 

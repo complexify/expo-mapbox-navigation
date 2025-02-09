@@ -209,6 +209,30 @@ public class ExpoMapboxNavigationModule: Module {
               view.controller.setSpeedLimitBorderColor(hexColor: hexColor)
           }
       }
+
+      Prop("maneuverViewPrimaryColor") { (view: ExpoMapboxNavigationView, color: String?) in
+          if let hexColor = color {
+              view.controller.setManeuverViewPrimaryColor(hexColor: hexColor)
+          }
+      }
+
+      Prop("maneuverViewSecondaryColor") { (view: ExpoMapboxNavigationView, color: String?) in
+          if let hexColor = color {
+              view.controller.setManeuverViewSecondaryColor(hexColor: hexColor)
+          }
+      }
+
+      Prop("maneuverViewTextColor") { (view: ExpoMapboxNavigationView, color: String?) in
+          if let hexColor = color {
+              view.controller.setManeuverViewTextColor(hexColor: hexColor)
+          }
+      }
+
+      Prop("maneuverViewBackgroundColor") { (view: ExpoMapboxNavigationView, color: String?) in
+          if let hexColor = color {
+              view.controller.setManeuverViewBackgroundColor(hexColor: hexColor)
+          }
+      }
     }
   }
 }

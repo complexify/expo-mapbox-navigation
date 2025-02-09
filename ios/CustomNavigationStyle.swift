@@ -23,6 +23,12 @@ class CustomDayStyle: StandardDayStyle {
     var customFloatingButtonsBorderColor: UIColor?
     var customFloatingButtonsTextColor: UIColor?
     
+    // New properties for maneuver view
+    var customManeuverViewPrimaryColor: UIColor?
+    var customManeuverViewSecondaryColor: UIColor?
+    var customManeuverViewTextColor: UIColor?
+    var customManeuverViewBackgroundColor: UIColor?
+    
     required init() {
         super.init()
         styleType = .day
@@ -52,6 +58,8 @@ class CustomDayStyle: StandardDayStyle {
         // Bottom banner text colors
         if let timeRemainingColor = customBottomBannerTimeRemainingTextColor {
             TimeRemainingLabel.appearance(for: traitCollection).textColor = timeRemainingColor
+            TimeRemainingLabel.appearance(for: traitCollection).valueTextColor = timeRemainingColor
+            TimeRemainingLabel.appearance(for: traitCollection).unitTextColor = timeRemainingColor
         }
         if let distanceRemainingColor = customBottomBannerDistanceRemainingTextColor {
             DistanceRemainingLabel.appearance(for: traitCollection).textColor = distanceRemainingColor
@@ -108,5 +116,22 @@ class CustomDayStyle: StandardDayStyle {
         // Set default values for floating buttons
         FloatingButton.appearance(for: traitCollection).borderWidth = 1.0
         FloatingButton.appearance(for: traitCollection).cornerRadius = 4.0
+        
+        // Top Banner - Current Direction Bar (ManeuverView)
+        if let primaryColor = customManeuverViewPrimaryColor {
+            ManeuverView.appearance(for: traitCollection).primaryColor = primaryColor
+        }
+        if let secondaryColor = customManeuverViewSecondaryColor {
+            ManeuverView.appearance(for: traitCollection).secondaryColor = secondaryColor
+        }
+        
+        // Current Direction Background and Text
+        if let bgColor = customManeuverViewBackgroundColor {
+            ManeuverView.appearance(for: traitCollection).backgroundColor = bgColor
+        }
+        if let textColor = customManeuverViewTextColor {
+            StepInstructionsView.appearance(for: traitCollection).primaryLabel.textColor = textColor
+            StepInstructionsView.appearance(for: traitCollection).secondaryLabel.textColor = textColor
+        }
     }
 }

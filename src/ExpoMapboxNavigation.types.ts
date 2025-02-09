@@ -68,4 +68,10 @@ export type ExpoMapboxNavigationViewProps = {
 
   // Way Name Label (8)
   wayNameViewBackgroundColor?: string;
+
+  // Maneuver View (Direction Arrow and Text)
+  maneuverViewPrimaryColor?: string;    // Main arrow color
+  maneuverViewSecondaryColor?: string;  // Secondary arrow color
+  maneuverViewTextColor?: string;       // Direction text color
+  maneuverViewBackgroundColor?: string; // Background of the direction bar
 };
