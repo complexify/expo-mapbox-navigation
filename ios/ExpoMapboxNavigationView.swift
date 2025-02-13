@@ -35,12 +35,6 @@ class ExpoMapboxNavigationView: ExpoView {
         controller.view.frame = bounds
     }
 
-    // Way Name View
-    func setWayNameViewTextColor(hexColor: String) {
-        controller.customDayStyle.customWayNameTextColor = UIColor(hex: hexColor)
-        controller.update()
-    }
-
     // Steps List
     func setStepsBackgroundColor(hexColor: String) {
         controller.customDayStyle.customStepsBackgroundColor = UIColor(hex: hexColor)
@@ -178,7 +172,7 @@ class ExpoMapboxNavigationView: ExpoView {
         controller.customDayStyle.customDistanceUnitColor = UIColor(hex: hexColor)
         controller.update()
     }
-    
+
     func setDistanceValueColor(hexColor: String) {
         controller.customDayStyle.customDistanceValueColor = UIColor(hex: hexColor)
         controller.update()
@@ -674,26 +668,6 @@ class ExpoMapboxNavigationViewController: UIViewController {
         update()
     }
 
-    func setManeuverViewPrimaryColor(hexColor: String) {
-        customDayStyle.customManeuverViewPrimaryColor = UIColor(hex: hexColor)
-        update()
-    }
-
-    func setManeuverViewSecondaryColor(hexColor: String) {
-        customDayStyle.customManeuverViewSecondaryColor = UIColor(hex: hexColor)
-        update()
-    }
-
-    func setManeuverViewTextColor(hexColor: String) {
-        customDayStyle.customManeuverViewTextColor = UIColor(hex: hexColor)
-        update()
-    }
-
-    func setManeuverViewBackgroundColor(hexColor: String) {
-        customDayStyle.customManeuverViewBackgroundColor = UIColor(hex: hexColor)
-        update()
-    }
-
     func setManeuverViewPrimaryColorHighlighted(hexColor: String) {
         customDayStyle.customManeuverViewPrimaryColorHighlighted = UIColor(hex: hexColor)
         update()
@@ -736,7 +710,7 @@ class ExpoMapboxNavigationViewController: UIViewController {
         calculateRoutesTask = Task {
             switch await self.routingProvider!.calculateRoutes(options: routeOptions).result {
             case .failure(let error):
-                print(error.localizedDescription)
+                print("Route calculation failed: \(error.localizedDescription)")
             case .success(let navigationRoutes):
                 onRoutesCalculated(navigationRoutes: navigationRoutes)
             }
@@ -756,7 +730,7 @@ class ExpoMapboxNavigationViewController: UIViewController {
         calculateRoutesTask = Task {
             switch await self.routingProvider!.calculateRoutes(options: matchOptions).result {
             case .failure(let error):
-                print(error.localizedDescription)
+                print("Map matching failed: \(error.localizedDescription)")
             case .success(let navigationRoutes):
                 onRoutesCalculated(navigationRoutes: navigationRoutes)
             }

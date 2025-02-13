@@ -200,10 +200,10 @@ class CustomDayStyle: StandardDayStyle {
         
         // Way Name View
         if let bgColor = customWayNameBackgroundColor {
-            WayNameView.appearance(for: traitCollection).backgroundColor = bgColor.withAlphaComponent(0.8)
+            WayNameLabel.appearance(for: traitCollection).backgroundColor = bgColor.withAlphaComponent(0.8)
         }
         if let textColor = customWayNameTextColor {
-            WayNameView.appearance(for: traitCollection).textColor = textColor
+            WayNameLabel.appearance(for: traitCollection).textColor = textColor
         }
         
         // Top Banner
@@ -265,46 +265,46 @@ class CustomDayStyle: StandardDayStyle {
         
         // Steps List
         if let bgColor = customStepsBackgroundColor {
-            StepsTableView.appearance(for: traitCollection).backgroundColor = bgColor
+            StepsViewController.appearance(for: traitCollection).tableView.backgroundColor = bgColor
         }
         if let primaryTextColor = customStepsPrimaryTextColor {
-            StepTableViewCell.appearance(for: traitCollection).primaryLabel.textColor = primaryTextColor
+            StepInstructionsView.appearance(for: traitCollection).primaryLabel.textColor = primaryTextColor
         }
         if let secondaryTextColor = customStepsSecondaryTextColor {
-            StepTableViewCell.appearance(for: traitCollection).secondaryLabel.textColor = secondaryTextColor
+            StepInstructionsView.appearance(for: traitCollection).secondaryLabel.textColor = secondaryTextColor
         }
         
         // Lane View
         if let bgColor = customLaneViewBackgroundColor {
-            LanesView.appearance(for: traitCollection).backgroundColor = bgColor
+            LaneView.appearance(for: traitCollection).backgroundColor = bgColor
         }
         if let fgColor = customLaneViewForegroundColor {
-            LaneView.appearance(for: traitCollection).foregroundColor = fgColor
+            LaneView.appearance(for: traitCollection).primaryColor = fgColor
         }
         if let separatorColor = customLaneViewSeparatorColor {
-            LanesView.appearance(for: traitCollection).separatorColor = separatorColor
+            LaneView.appearance(for: traitCollection).separatorColor = separatorColor
         }
         
         // Next Banner View
         if let bgColor = customNextBannerBackgroundColor {
-            NextBannerView.appearance(for: traitCollection).backgroundColor = bgColor
+            NextInstructionView.appearance(for: traitCollection).backgroundColor = bgColor
         }
         if let primaryTextColor = customNextBannerPrimaryTextColor {
-            NextBannerView.appearance(for: traitCollection).primaryLabel.textColor = primaryTextColor
+            NextInstructionView.appearance(for: traitCollection).primaryLabel.textColor = primaryTextColor
         }
         if let secondaryTextColor = customNextBannerSecondaryTextColor {
-            NextBannerView.appearance(for: traitCollection).secondaryLabel.textColor = secondaryTextColor
+            NextInstructionView.appearance(for: traitCollection).secondaryLabel.textColor = secondaryTextColor
         }
         if let distanceTextColor = customNextBannerDistanceTextColor {
-            NextBannerView.appearance(for: traitCollection).distanceLabel.textColor = distanceTextColor
+            NextInstructionView.appearance(for: traitCollection).distanceLabel.textColor = distanceTextColor
         }
         
         // Progress Bar
         if let progressColor = customProgressBarProgressColor {
-            ProgressBar.appearance(for: traitCollection).progressColor = progressColor
+            RouteProgressView.appearance(for: traitCollection).progressColor = progressColor
         }
         if let backgroundColor = customProgressBarBackgroundColor {
-            ProgressBar.appearance(for: traitCollection).backgroundColor = backgroundColor
+            RouteProgressView.appearance(for: traitCollection).backgroundColor = backgroundColor
         }
 
         // Exit View
