@@ -34,6 +34,336 @@ class ExpoMapboxNavigationView: ExpoView {
     override func layoutSubviews() {
         controller.view.frame = bounds
     }
+
+    // Way Name View
+    func setWayNameViewTextColor(hexColor: String) {
+        controller.customDayStyle.customWayNameTextColor = UIColor(hex: hexColor)
+        controller.update()
+    }
+
+    // Steps List
+    func setStepsBackgroundColor(hexColor: String) {
+        controller.customDayStyle.customStepsBackgroundColor = UIColor(hex: hexColor)
+        controller.update()
+    }
+
+    func setStepsPrimaryTextColor(hexColor: String) {
+        controller.customDayStyle.customStepsPrimaryTextColor = UIColor(hex: hexColor)
+        controller.update()
+    }
+
+    func setStepsSecondaryTextColor(hexColor: String) {
+        controller.customDayStyle.customStepsSecondaryTextColor = UIColor(hex: hexColor)
+        controller.update()
+    }
+
+    func setStepsManeuverViewPrimaryColor(hexColor: String) {
+        controller.customDayStyle.customStepsManeuverViewPrimaryColor = UIColor(hex: hexColor)
+        controller.update()
+    }
+
+    func setStepsManeuverViewSecondaryColor(hexColor: String) {
+        controller.customDayStyle.customStepsManeuverViewSecondaryColor = UIColor(hex: hexColor)
+        controller.update()
+    }
+
+    func setStepsSeparatorColor(hexColor: String) {
+        controller.customDayStyle.customStepsSeparatorColor = UIColor(hex: hexColor)
+        controller.update()
+    }
+
+    // Lane View
+    func setLaneViewBackgroundColor(hexColor: String) {
+        controller.customDayStyle.customLaneViewBackgroundColor = UIColor(hex: hexColor)
+        controller.update()
+    }
+
+    func setLaneViewForegroundColor(hexColor: String) {
+        controller.customDayStyle.customLaneViewForegroundColor = UIColor(hex: hexColor)
+        controller.update()
+    }
+
+    func setLaneViewSeparatorColor(hexColor: String) {
+        controller.customDayStyle.customLaneViewSeparatorColor = UIColor(hex: hexColor)
+        controller.update()
+    }
+
+    // Next Banner View
+    func setNextBannerBackgroundColor(hexColor: String) {
+        controller.customDayStyle.customNextBannerBackgroundColor = UIColor(hex: hexColor)
+        controller.update()
+    }
+
+    func setNextBannerPrimaryTextColor(hexColor: String) {
+        controller.customDayStyle.customNextBannerPrimaryTextColor = UIColor(hex: hexColor)
+        controller.update()
+    }
+
+    func setNextBannerSecondaryTextColor(hexColor: String) {
+        controller.customDayStyle.customNextBannerSecondaryTextColor = UIColor(hex: hexColor)
+        controller.update()
+    }
+
+    func setNextBannerDistanceTextColor(hexColor: String) {
+        controller.customDayStyle.customNextBannerDistanceTextColor = UIColor(hex: hexColor)
+        controller.update()
+    }
+
+    // Progress Bar
+    func setProgressBarProgressColor(hexColor: String) {
+        controller.customDayStyle.customProgressBarProgressColor = UIColor(hex: hexColor)
+        controller.update()
+    }
+
+    func setProgressBarBackgroundColor(hexColor: String) {
+        controller.customDayStyle.customProgressBarBackgroundColor = UIColor(hex: hexColor)
+        controller.update()
+    }
+
+    // Instructions Card
+    func setInstructionsCardBackgroundColor(hexColor: String) {
+        controller.customDayStyle.customInstructionsCardBackgroundColor = UIColor(hex: hexColor)
+        controller.update()
+    }
+    
+    func setInstructionsCardSeparatorColor(hexColor: String) {
+        controller.customDayStyle.customInstructionsCardSeparatorColor = UIColor(hex: hexColor)
+        controller.update()
+    }
+    
+    func setInstructionsCardHighlightedSeparatorColor(hexColor: String) {
+        controller.customDayStyle.customInstructionsCardHighlightedSeparatorColor = UIColor(hex: hexColor)
+        controller.update()
+    }
+    
+    // Exit View
+    func setExitViewForegroundColor(hexColor: String) {
+        controller.customDayStyle.customExitViewForegroundColor = UIColor(hex: hexColor)
+        controller.update()
+    }
+    
+    func setExitViewBorderColor(hexColor: String) {
+        controller.customDayStyle.customExitViewBorderColor = UIColor(hex: hexColor)
+        controller.update()
+    }
+    
+    func setExitViewHighlightColor(hexColor: String) {
+        controller.customDayStyle.customExitViewHighlightColor = UIColor(hex: hexColor)
+        controller.update()
+    }
+    
+    // Route Shield
+    func setRouteShieldForegroundColor(hexColor: String) {
+        controller.customDayStyle.customRouteShieldForegroundColor = UIColor(hex: hexColor)
+        controller.update()
+    }
+    
+    func setRouteShieldBorderColor(hexColor: String) {
+        controller.customDayStyle.customRouteShieldBorderColor = UIColor(hex: hexColor)
+        controller.update()
+    }
+    
+    func setRouteShieldHighlightColor(hexColor: String) {
+        controller.customDayStyle.customRouteShieldHighlightColor = UIColor(hex: hexColor)
+        controller.update()
+    }
+    
+    // Distance Labels
+    func setDistanceRemainingColor(hexColor: String) {
+        controller.customDayStyle.customDistanceRemainingColor = UIColor(hex: hexColor)
+        controller.update()
+    }
+    
+    func setDistanceUnitColor(hexColor: String) {
+        controller.customDayStyle.customDistanceUnitColor = UIColor(hex: hexColor)
+        controller.update()
+    }
+    
+    func setDistanceValueColor(hexColor: String) {
+        controller.customDayStyle.customDistanceValueColor = UIColor(hex: hexColor)
+        controller.update()
+    }
+    
+    // Navigation Map
+    func setRouteAnnotationSelectedColor(hexColor: String) {
+        controller.customDayStyle.customRouteAnnotationSelectedColor = UIColor(hex: hexColor)
+        controller.update()
+    }
+    
+    func setRouteAnnotationColor(hexColor: String) {
+        controller.customDayStyle.customRouteAnnotationColor = UIColor(hex: hexColor)
+        controller.update()
+    }
+
+    // Route Shield Colors
+    func setRoadShieldBlackColor(hexColor: String) {
+        controller.customDayStyle.customRoadShieldBlackColor = UIColor(hex: hexColor)
+        controller.update()
+    }
+
+    func setRoadShieldBlueColor(hexColor: String) {
+        controller.customDayStyle.customRoadShieldBlueColor = UIColor(hex: hexColor)
+        controller.update()
+    }
+
+    func setRoadShieldGreenColor(hexColor: String) {
+        controller.customDayStyle.customRoadShieldGreenColor = UIColor(hex: hexColor)
+        controller.update()
+    }
+
+    func setRoadShieldRedColor(hexColor: String) {
+        controller.customDayStyle.customRoadShieldRedColor = UIColor(hex: hexColor)
+        controller.update()
+    }
+
+    func setRoadShieldWhiteColor(hexColor: String) {
+        controller.customDayStyle.customRoadShieldWhiteColor = UIColor(hex: hexColor)
+        controller.update()
+    }
+
+    func setRoadShieldYellowColor(hexColor: String) {
+        controller.customDayStyle.customRoadShieldYellowColor = UIColor(hex: hexColor)
+        controller.update()
+    }
+
+    func setRoadShieldDefaultColor(hexColor: String) {
+        controller.customDayStyle.customRoadShieldDefaultColor = UIColor(hex: hexColor)
+        controller.update()
+    }
+
+    // Button Properties
+    func setButtonTextColor(hexColor: String) {
+        controller.customDayStyle.customButtonTextColor = UIColor(hex: hexColor)
+        controller.update()
+    }
+
+    func setCancelButtonTintColor(hexColor: String) {
+        controller.customDayStyle.customCancelButtonTintColor = UIColor(hex: hexColor)
+        controller.update()
+    }
+
+    func setPreviewButtonTintColor(hexColor: String) {
+        controller.customDayStyle.customPreviewButtonTintColor = UIColor(hex: hexColor)
+        controller.update()
+    }
+
+    func setStartButtonTintColor(hexColor: String) {
+        controller.customDayStyle.customStartButtonTintColor = UIColor(hex: hexColor)
+        controller.update()
+    }
+
+    func setDismissButtonBackgroundColor(hexColor: String) {
+        controller.customDayStyle.customDismissButtonBackgroundColor = UIColor(hex: hexColor)
+        controller.update()
+    }
+
+    func setDismissButtonTextColor(hexColor: String) {
+        controller.customDayStyle.customDismissButtonTextColor = UIColor(hex: hexColor)
+        controller.update()
+    }
+
+    func setBackButtonBackgroundColor(hexColor: String) {
+        controller.customDayStyle.customBackButtonBackgroundColor = UIColor(hex: hexColor)
+        controller.update()
+    }
+
+    func setBackButtonTintColor(hexColor: String) {
+        controller.customDayStyle.customBackButtonTintColor = UIColor(hex: hexColor)
+        controller.update()
+    }
+
+    func setBackButtonTextColor(hexColor: String) {
+        controller.customDayStyle.customBackButtonTextColor = UIColor(hex: hexColor)
+        controller.update()
+    }
+
+    func setBackButtonBorderColor(hexColor: String) {
+        controller.customDayStyle.customBackButtonBorderColor = UIColor(hex: hexColor)
+        controller.update()
+    }
+
+    // Navigation View
+    func setNavigationViewBackgroundColor(hexColor: String) {
+        controller.customDayStyle.customNavigationViewBackgroundColor = UIColor(hex: hexColor)
+        controller.update()
+    }
+
+    // Distance Label Properties
+    func setDistanceLabelUnitTextColor(hexColor: String) {
+        controller.customDayStyle.customDistanceLabelUnitTextColor = UIColor(hex: hexColor)
+        controller.update()
+    }
+
+    func setDistanceLabelValueTextColor(hexColor: String) {
+        controller.customDayStyle.customDistanceLabelValueTextColor = UIColor(hex: hexColor)
+        controller.update()
+    }
+
+    // Rating Control
+    func setRatingControlNormalColor(hexColor: String) {
+        controller.customDayStyle.customRatingControlNormalColor = UIColor(hex: hexColor)
+        controller.update()
+    }
+
+    func setRatingControlSelectedColor(hexColor: String) {
+        controller.customDayStyle.customRatingControlSelectedColor = UIColor(hex: hexColor)
+        controller.update()
+    }
+
+    // Steps Properties
+    func setStepsBackgroundViewColor(hexColor: String) {
+        controller.customDayStyle.customStepsBackgroundViewColor = UIColor(hex: hexColor)
+        controller.update()
+    }
+
+    func setStepsTableHeaderTintColor(hexColor: String) {
+        controller.customDayStyle.customStepsTableHeaderTintColor = UIColor(hex: hexColor)
+        controller.update()
+    }
+
+    func setStepsTableHeaderTextColor(hexColor: String) {
+        controller.customDayStyle.customStepsTableHeaderTextColor = UIColor(hex: hexColor)
+        controller.update()
+    }
+
+    func setStepInstructionsBackgroundColor(hexColor: String) {
+        controller.customDayStyle.customStepInstructionsBackgroundColor = UIColor(hex: hexColor)
+        controller.update()
+    }
+
+    func setStepTableViewCellBackgroundColor(hexColor: String) {
+        controller.customDayStyle.customStepTableViewCellBackgroundColor = UIColor(hex: hexColor)
+        controller.update()
+    }
+
+    // Next Instruction
+    func setNextInstructionNormalTextColor(hexColor: String) {
+        controller.customDayStyle.customNextInstructionNormalTextColor = UIColor(hex: hexColor)
+        controller.update()
+    }
+
+    func setNextInstructionContainedTextColor(hexColor: String) {
+        controller.customDayStyle.customNextInstructionContainedTextColor = UIColor(hex: hexColor)
+        controller.update()
+    }
+
+    // Secondary Label Properties
+    func setSecondaryLabelNormalTextColor(hexColor: String) {
+        controller.customDayStyle.customSecondaryLabelNormalTextColor = UIColor(hex: hexColor)
+        controller.update()
+    }
+
+    // Stylable Label
+    func setStylableLabelNormalTextColor(hexColor: String) {
+        controller.customDayStyle.customStylableLabelNormalTextColor = UIColor(hex: hexColor)
+        controller.update()
+    }
+
+    // CarPlay Properties
+    func setCarPlayCompassBackgroundColor(hexColor: String) {
+        controller.customDayStyle.customCarPlayCompassBackgroundColor = UIColor(hex: hexColor)
+        controller.update()
+    }
 }
 
 
@@ -361,6 +691,16 @@ class ExpoMapboxNavigationViewController: UIViewController {
 
     func setManeuverViewBackgroundColor(hexColor: String) {
         customDayStyle.customManeuverViewBackgroundColor = UIColor(hex: hexColor)
+        update()
+    }
+
+    func setManeuverViewPrimaryColorHighlighted(hexColor: String) {
+        customDayStyle.customManeuverViewPrimaryColorHighlighted = UIColor(hex: hexColor)
+        update()
+    }
+
+    func setManeuverViewSecondaryColorHighlighted(hexColor: String) {
+        customDayStyle.customManeuverViewSecondaryColorHighlighted = UIColor(hex: hexColor)
         update()
     }
 
