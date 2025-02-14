@@ -390,8 +390,6 @@ class ExpoMapboxNavigationViewController: UIViewController {
     private var reroutingCancellable: AnyCancellable? = nil
     private var sessionCancellable: AnyCancellable? = nil
 
-    var currentRouteColor: UIColor?
-    var currentRouteAlternateColor: UIColor?
     var currentRouteCasingColor: UIColor?
     var currentRouteAlternateCasingColor: UIColor?
     var currentTraversedRouteColor: UIColor?
@@ -529,18 +527,8 @@ class ExpoMapboxNavigationViewController: UIViewController {
         }
     }
 
-    func setRouteColor(hexColor: String) {
-        currentRouteColor = UIColor(hex: hexColor)
-        update()
-    }
-
-    func setRouteAlternateColor(hexColor: String) {
-        currentRouteAlternateColor = UIColor(hex: hexColor)
-        update()
-    }
-
     func setRouteCasingColor(hexColor: String) {
-        currentRouteCasingColor = UIColor(hex: hexColor)
+        customDayStyle.customRouteCasingColor = UIColor(hex: hexColor)
         update()
     }
 
@@ -698,7 +686,7 @@ class ExpoMapboxNavigationViewController: UIViewController {
         }
     }
 
-    func calculateRoutes(waypoints: Array<Waypoint>){
+    func calculateRoutes(waypoints: Array<Waypoint>) {
         let routeOptions = NavigationRouteOptions(
             waypoints: waypoints, 
             profileIdentifier: currentRouteProfile != nil ? ProfileIdentifier(rawValue: currentRouteProfile!) : nil,
@@ -708,16 +696,21 @@ class ExpoMapboxNavigationViewController: UIViewController {
         )
 
         calculateRoutesTask = Task {
-            switch await self.routingProvider!.calculateRoutes(options: routeOptions).result {
-            case .failure(let error):
+            do {
+                let result = try await self.routingProvider!.calculateRoutes(options: routeOptions)
+                switch result.result {
+                case .success(let navigationRoutes):
+                    onRoutesCalculated(navigationRoutes: navigationRoutes)
+                case .failure(let error):
+                    print("Route calculation error: \(error.localizedDescription)")
+                }
+            } catch {
                 print("Failed to calculate routes: \(error.localizedDescription)")
-            case .success(let navigationRoutes):
-                onRoutesCalculated(navigationRoutes: navigationRoutes)
             }
         }
     }
 
-    func calculateMapMatchingRoutes(waypoints: Array<Waypoint>){
+    func calculateMapMatchingRoutes(waypoints: Array<Waypoint>) {
         let matchOptions = NavigationMatchOptions(
             waypoints: waypoints, 
             profileIdentifier: currentRouteProfile != nil ? ProfileIdentifier(rawValue: currentRouteProfile!) : nil,
@@ -726,13 +719,17 @@ class ExpoMapboxNavigationViewController: UIViewController {
         )
         matchOptions.locale = currentLocale
 
-
         calculateRoutesTask = Task {
-            switch await self.routingProvider!.calculateRoutes(options: matchOptions).result {
-            case .failure(let error):
+            do {
+                let result = try await self.routingProvider!.calculateRoutes(options: matchOptions)
+                switch result.result {
+                case .success(let navigationRoutes):
+                    onRoutesCalculated(navigationRoutes: navigationRoutes)
+                case .failure(let error):
+                    print("Map matching error: \(error.localizedDescription)")
+                }
+            } catch {
                 print("Failed to match routes: \(error.localizedDescription)")
-            case .success(let navigationRoutes):
-                onRoutesCalculated(navigationRoutes: navigationRoutes)
             }
         }
     }
@@ -794,17 +791,8 @@ class ExpoMapboxNavigationViewController: UIViewController {
         mapboxNavigation!.tripSession().startActiveGuidance(with: navigationRoutes, startLegIndex: 0)
     
         // Apply custom colors if set
-        if let routeColor = currentRouteColor {
-            navigationMapView?.routeColor = routeColor
-        }
-        if let alternateColor = currentRouteAlternateColor {
-            navigationMapView?.routeAlternateColor = alternateColor
-        }
         if let casingColor = currentRouteCasingColor {
             navigationMapView?.routeCasingColor = casingColor
-        }
-        if let alternateCasingColor = currentRouteAlternateCasingColor {
-            navigationMapView?.routeAlternateCasingColor = alternateCasingColor
         }
         if let traversedColor = currentTraversedRouteColor {
             navigationMapView?.traversedRouteColor = traversedColor

@@ -1,9 +1,9 @@
-import Foundation
 import MapboxMaps
+import MapboxNavigationCore
 import MapboxNavigationUIKit
 import UIKit
 
-class CustomDayStyle: StandardDayStyle {
+class CustomDayStyle: Style {
     // Speed Limit View
     var customSpeedLimitTextColor: UIColor?
     var customSpeedLimitBackgroundColor: UIColor?
@@ -81,7 +81,12 @@ class CustomDayStyle: StandardDayStyle {
     var customDistanceValueColor: UIColor?
 
     // Navigation Map
+    var customRouteColor: UIColor?
     var customRouteAlternateColor: UIColor?
+    var customRouteCasingColor: UIColor?
+    var customRouteAlternateCasingColor: UIColor?
+    var customTraversedRouteColor: UIColor?
+    var customManeuverArrowColor: UIColor?
     var customRouteAnnotationSelectedColor: UIColor?
     var customRouteAnnotationColor: UIColor?
     var customRouteAnnotationTextColor: UIColor?
@@ -166,6 +171,9 @@ class CustomDayStyle: StandardDayStyle {
     required init() {
         super.init()
         styleType = .day
+        mapStyleURL = URL(string: StyleURI.light.rawValue)!
+        previewMapStyleURL = mapStyleURL
+        statusBarStyle = .darkContent
     }
     
     override func apply() {
@@ -233,8 +241,6 @@ class CustomDayStyle: StandardDayStyle {
         if let resumeBorderColor = customResumeButtonBorderColor {
             ResumeButton.appearance(for: traitCollection).borderColor = resumeBorderColor
         }
-        ResumeButton.appearance(for: traitCollection).borderWidth = 1.0
-        ResumeButton.appearance(for: traitCollection).cornerRadius = 4.0
         
         // Floating Buttons
         if let floatingBgColor = customFloatingButtonsBackgroundColor {
@@ -246,8 +252,6 @@ class CustomDayStyle: StandardDayStyle {
         if let floatingBorderColor = customFloatingButtonsBorderColor {
             FloatingButton.appearance(for: traitCollection).borderColor = floatingBorderColor
         }
-        FloatingButton.appearance(for: traitCollection).borderWidth = 1.0
-        FloatingButton.appearance(for: traitCollection).cornerRadius = 4.0
         
         // Maneuver View
         if let primaryColor = customManeuverViewPrimaryColor {
@@ -329,11 +333,6 @@ class CustomDayStyle: StandardDayStyle {
             GenericRouteShield.appearance(for: traitCollection).highlightColor = highlightColor
         }
 
-        // Distance Labels
-        if let distanceColor = customDistanceRemainingColor {
-            DistanceRemainingLabel.appearance(for: traitCollection).normalTextColor = distanceColor
-        }
-
         // Instructions Card
         if let bgColor = customInstructionsCardBackgroundColor {
             InstructionsCardContainerView.appearance(
@@ -399,10 +398,25 @@ class CustomDayStyle: StandardDayStyle {
             InstructionLabel.appearance(for: traitCollection).roadShieldDefaultColor = defaultColor
         }
 
-        // Navigation Map
         Task { @MainActor in
+            // Navigation Map
+            if let routeColor = customRouteColor {
+                NavigationMapView.appearance(for: traitCollection).routeColor = routeColor
+            }
             if let alternateColor = customRouteAlternateColor {
                 NavigationMapView.appearance(for: traitCollection).routeAlternateColor = alternateColor
+            }
+            if let casingColor = customRouteCasingColor {
+                NavigationMapView.appearance(for: traitCollection).routeCasingColor = casingColor
+            }
+            if let alternateCasingColor = customRouteAlternateCasingColor {
+                NavigationMapView.appearance(for: traitCollection).routeAlternateCasingColor = alternateCasingColor
+            }
+            if let traversedColor = customTraversedRouteColor {
+                NavigationMapView.appearance(for: traitCollection).traversedRouteColor = traversedColor
+            }
+            if let arrowColor = customManeuverArrowColor {
+                NavigationMapView.appearance(for: traitCollection).maneuverArrowColor = arrowColor
             }
             if let selectedColor = customRouteAnnotationSelectedColor {
                 NavigationMapView.appearance(for: traitCollection).routeAnnotationSelectedColor = selectedColor
@@ -485,6 +499,15 @@ class CustomDayStyle: StandardDayStyle {
             DistanceLabel.appearance(for: traitCollection).valueTextColor = valueTextColor
         }
 
+        // Rating Control
+        if let normalColor = customRatingControlNormalColor {
+            RatingControl.appearance(for: traitCollection).normalColor = normalColor
+        }
+        
+        if let selectedColor = customRatingControlSelectedColor {
+            RatingControl.appearance(for: traitCollection).selectedColor = selectedColor
+        }
+
         // Steps Properties
         if let bgViewColor = customStepsBackgroundViewColor {
             StepsBackgroundView.appearance(for: traitCollection).backgroundColor = bgViewColor
@@ -533,4 +556,4 @@ class CustomDayStyle: StandardDayStyle {
             CarPlayCompassView.appearance(for: traitCollection).backgroundColor = compassBgColor
         }
     }
-}
+} 
