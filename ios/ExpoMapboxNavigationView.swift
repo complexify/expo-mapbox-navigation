@@ -358,6 +358,16 @@ class ExpoMapboxNavigationView: ExpoView {
         controller.customDayStyle.customCarPlayCompassBackgroundColor = UIColor(hex: hexColor)
         controller.update()
     }
+
+    func setRouteCasingColor(hexColor: String) {
+        customDayStyle.customRouteCasingColor = UIColor(hex: hexColor)
+        update()
+    }
+
+    func setRouteAlternateCasingColor(hexColor: String) {
+        customDayStyle.customRouteAlternateCasingColor = UIColor(hex: hexColor)
+        update()
+    }
 }
 
 
@@ -389,11 +399,6 @@ class ExpoMapboxNavigationViewController: UIViewController {
     private var waypointArrivalCancellable: AnyCancellable? = nil
     private var reroutingCancellable: AnyCancellable? = nil
     private var sessionCancellable: AnyCancellable? = nil
-
-    var currentRouteCasingColor: UIColor?
-    var currentRouteAlternateCasingColor: UIColor?
-    var currentTraversedRouteColor: UIColor?
-    var currentManeuverArrowColor: UIColor?
 
     var currentTopBannerBackgroundColor: UIColor?
     var currentTopBannerPrimaryTextColor: UIColor?
@@ -525,26 +530,6 @@ class ExpoMapboxNavigationViewController: UIViewController {
         if(isMuted != nil){
             ExpoMapboxNavigationViewController.navigationProvider.routeVoiceController.speechSynthesizer.muted = isMuted!
         }
-    }
-
-    func setRouteCasingColor(hexColor: String) {
-        customDayStyle.customRouteCasingColor = UIColor(hex: hexColor)
-        update()
-    }
-
-    func setRouteAlternateCasingColor(hexColor: String) {
-        currentRouteAlternateCasingColor = UIColor(hex: hexColor)
-        update()
-    }
-
-    func setTraversedRouteColor(hexColor: String) {
-        currentTraversedRouteColor = UIColor(hex: hexColor)
-        update()
-    }
-
-    func setManeuverArrowColor(hexColor: String) {
-        currentManeuverArrowColor = UIColor(hex: hexColor)
-        update()
     }
 
     func setTopBannerBackgroundColor(hexColor: String) {
@@ -791,13 +776,10 @@ class ExpoMapboxNavigationViewController: UIViewController {
         mapboxNavigation!.tripSession().startActiveGuidance(with: navigationRoutes, startLegIndex: 0)
     
         // Apply custom colors if set
-        if let casingColor = currentRouteCasingColor {
+        if let casingColor = customDayStyle.customRouteCasingColor {
             navigationMapView?.routeCasingColor = casingColor
         }
-        if let traversedColor = currentTraversedRouteColor {
-            navigationMapView?.traversedRouteColor = traversedColor
-        }
-        if let arrowColor = currentManeuverArrowColor {
+        if let arrowColor = customDayStyle.customManeuverArrowColor {
             navigationMapView?.maneuverArrowColor = arrowColor
         }
     }
