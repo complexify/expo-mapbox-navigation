@@ -260,6 +260,158 @@ public class ExpoMapboxNavigationModule: Module {
               view.controller.update()
           }
       }
+
+      // Next Banner View
+      Prop("nextBannerBackgroundColor") { (view: ExpoMapboxNavigationView, color: String?) in
+          if let hexColor = color {
+              view.controller.setNextBannerBackgroundColor(hexColor: hexColor)
+          }
+      }
+
+      Prop("nextBannerPrimaryTextColor") { (view: ExpoMapboxNavigationView, color: String?) in
+          if let hexColor = color {
+              view.controller.setNextBannerPrimaryTextColor(hexColor: hexColor)
+          }
+      }
+
+      Prop("nextBannerSecondaryTextColor") { (view: ExpoMapboxNavigationView, color: String?) in
+          if let hexColor = color {
+              view.controller.setNextBannerSecondaryTextColor(hexColor: hexColor)
+          }
+      }
+
+      Prop("nextBannerDistanceTextColor") { (view: ExpoMapboxNavigationView, color: String?) in
+          if let hexColor = color {
+              view.controller.setNextBannerDistanceTextColor(hexColor: hexColor)
+          }
+      }
+
+      // Progress Bar
+      Prop("progressBarProgressColor") { (view: ExpoMapboxNavigationView, color: String?) in
+          if let hexColor = color {
+              view.controller.setProgressBarProgressColor(hexColor: hexColor)
+          }
+      }
+
+      Prop("progressBarBackgroundColor") { (view: ExpoMapboxNavigationView, color: String?) in
+          if let hexColor = color {
+              view.controller.setProgressBarBackgroundColor(hexColor: hexColor)
+          }
+      }
+
+      // Maneuver View
+      Prop("maneuverViewPrimaryColor") { (view: ExpoMapboxNavigationView, color: String?) in
+          if let hexColor = color {
+              view.controller.setManeuverViewPrimaryColor(hexColor: hexColor)
+          }
+      }
+
+      Prop("maneuverViewSecondaryColor") { (view: ExpoMapboxNavigationView, color: String?) in
+          if let hexColor = color {
+              view.controller.setManeuverViewSecondaryColor(hexColor: hexColor)
+          }
+      }
+
+      Prop("maneuverViewPrimaryColorHighlighted") { (view: ExpoMapboxNavigationView, color: String?) in
+          if let hexColor = color {
+              view.controller.setManeuverViewPrimaryColorHighlighted(hexColor: hexColor)
+          }
+      }
+
+      Prop("maneuverViewSecondaryColorHighlighted") { (view: ExpoMapboxNavigationView, color: String?) in
+          if let hexColor = color {
+              view.controller.setManeuverViewSecondaryColorHighlighted(hexColor: hexColor)
+          }
+      }
+
+      // Instructions Card
+      Prop("instructionsCardBackgroundColor") { (view: ExpoMapboxNavigationView, color: String?) in
+          if let hexColor = color {
+              view.controller.setInstructionsCardBackgroundColor(hexColor: hexColor)
+          }
+      }
+
+      Prop("instructionsCardSeparatorColor") { (view: ExpoMapboxNavigationView, color: String?) in
+          if let hexColor = color {
+              view.controller.setInstructionsCardSeparatorColor(hexColor: hexColor)
+          }
+      }
+
+      Prop("instructionsCardHighlightedSeparatorColor") { (view: ExpoMapboxNavigationView, color: String?) in
+          if let hexColor = color {
+              view.controller.setInstructionsCardHighlightedSeparatorColor(hexColor: hexColor)
+          }
+      }
+
+      // Exit View
+      Prop("exitViewForegroundColor") { (view: ExpoMapboxNavigationView, color: String?) in
+          if let hexColor = color {
+              view.controller.setExitViewForegroundColor(hexColor: hexColor)
+          }
+      }
+
+      Prop("exitViewBorderColor") { (view: ExpoMapboxNavigationView, color: String?) in
+          if let hexColor = color {
+              view.controller.setExitViewBorderColor(hexColor: hexColor)
+          }
+      }
+
+      Prop("exitViewHighlightColor") { (view: ExpoMapboxNavigationView, color: String?) in
+          if let hexColor = color {
+              view.controller.setExitViewHighlightColor(hexColor: hexColor)
+          }
+      }
+
+      // Route Shield
+      Prop("routeShieldForegroundColor") { (view: ExpoMapboxNavigationView, color: String?) in
+          if let hexColor = color {
+              view.controller.setRouteShieldForegroundColor(hexColor: hexColor)
+          }
+      }
+
+      Prop("routeShieldBorderColor") { (view: ExpoMapboxNavigationView, color: String?) in
+          if let hexColor = color {
+              view.controller.setRouteShieldBorderColor(hexColor: hexColor)
+          }
+      }
+
+      Prop("routeShieldHighlightColor") { (view: ExpoMapboxNavigationView, color: String?) in
+          if let hexColor = color {
+              view.controller.setRouteShieldHighlightColor(hexColor: hexColor)
+          }
+      }
+
+      // Distance Labels
+      Prop("distanceRemainingColor") { (view: ExpoMapboxNavigationView, color: String?) in
+          if let hexColor = color {
+              view.controller.setDistanceRemainingColor(hexColor: hexColor)
+          }
+      }
+
+      Prop("distanceUnitColor") { (view: ExpoMapboxNavigationView, color: String?) in
+          if let hexColor = color {
+              view.controller.setDistanceUnitColor(hexColor: hexColor)
+          }
+      }
+
+      Prop("distanceValueColor") { (view: ExpoMapboxNavigationView, color: String?) in
+          if let hexColor = color {
+              view.controller.setDistanceValueColor(hexColor: hexColor)
+          }
+      }
+
+      // Rating Control
+      Prop("ratingControlNormalColor") { (view: ExpoMapboxNavigationView, color: String?) in
+          if let hexColor = color {
+              view.controller.setRatingControlNormalColor(hexColor: hexColor)
+          }
+      }
+
+      Prop("ratingControlSelectedColor") { (view: ExpoMapboxNavigationView, color: String?) in
+          if let hexColor = color {
+              view.controller.setRatingControlSelectedColor(hexColor: hexColor)
+          }
+      }
     }
   }
 }
