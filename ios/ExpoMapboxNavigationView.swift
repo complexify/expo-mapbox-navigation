@@ -710,7 +710,7 @@ class ExpoMapboxNavigationViewController: UIViewController {
         calculateRoutesTask = Task {
             switch await self.routingProvider!.calculateRoutes(options: routeOptions).result {
             case .failure(let error):
-                print("Route calculation failed: \(error.localizedDescription)")
+                print("Failed to calculate routes: \(error.localizedDescription)")
             case .success(let navigationRoutes):
                 onRoutesCalculated(navigationRoutes: navigationRoutes)
             }
@@ -730,7 +730,7 @@ class ExpoMapboxNavigationViewController: UIViewController {
         calculateRoutesTask = Task {
             switch await self.routingProvider!.calculateRoutes(options: matchOptions).result {
             case .failure(let error):
-                print("Map matching failed: \(error.localizedDescription)")
+                print("Failed to match routes: \(error.localizedDescription)")
             case .success(let navigationRoutes):
                 onRoutesCalculated(navigationRoutes: navigationRoutes)
             }

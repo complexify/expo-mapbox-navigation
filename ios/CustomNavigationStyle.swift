@@ -265,7 +265,7 @@ class CustomDayStyle: StandardDayStyle {
         
         // Steps List
         if let bgColor = customStepsBackgroundColor {
-            StepsViewController.appearance(for: traitCollection).tableView.backgroundColor = bgColor
+            StepsBackgroundView.appearance(for: traitCollection).backgroundColor = bgColor
         }
         if let primaryTextColor = customStepsPrimaryTextColor {
             StepInstructionsView.appearance(for: traitCollection).primaryLabel.textColor = primaryTextColor
@@ -282,29 +282,29 @@ class CustomDayStyle: StandardDayStyle {
             LaneView.appearance(for: traitCollection).primaryColor = fgColor
         }
         if let separatorColor = customLaneViewSeparatorColor {
-            LaneView.appearance(for: traitCollection).separatorColor = separatorColor
+            LaneView.appearance(for: traitCollection).backgroundColor = separatorColor.withAlphaComponent(0.5)
         }
         
         // Next Banner View
         if let bgColor = customNextBannerBackgroundColor {
-            NextInstructionView.appearance(for: traitCollection).backgroundColor = bgColor
+            NextBannerView.appearance(for: traitCollection).backgroundColor = bgColor
         }
         if let primaryTextColor = customNextBannerPrimaryTextColor {
-            NextInstructionView.appearance(for: traitCollection).primaryLabel.textColor = primaryTextColor
+            NextBannerView.appearance(for: traitCollection).textColor = primaryTextColor
         }
         if let secondaryTextColor = customNextBannerSecondaryTextColor {
-            NextInstructionView.appearance(for: traitCollection).secondaryLabel.textColor = secondaryTextColor
+            NextBannerView.appearance(for: traitCollection).secondaryTextColor = secondaryTextColor
         }
         if let distanceTextColor = customNextBannerDistanceTextColor {
-            NextInstructionView.appearance(for: traitCollection).distanceLabel.textColor = distanceTextColor
+            NextBannerView.appearance(for: traitCollection).distanceTextColor = distanceTextColor
         }
         
         // Progress Bar
         if let progressColor = customProgressBarProgressColor {
-            RouteProgressView.appearance(for: traitCollection).progressColor = progressColor
+            ProgressBar.appearance(for: traitCollection).tintColor = progressColor
         }
         if let backgroundColor = customProgressBarBackgroundColor {
-            RouteProgressView.appearance(for: traitCollection).backgroundColor = backgroundColor
+            ProgressBar.appearance(for: traitCollection).backgroundColor = backgroundColor
         }
 
         // Exit View
@@ -485,26 +485,17 @@ class CustomDayStyle: StandardDayStyle {
             DistanceLabel.appearance(for: traitCollection).valueTextColor = valueTextColor
         }
 
-        // Rating Control
-        if let normalColor = customRatingControlNormalColor {
-            RatingControl.appearance(for: traitCollection).normalColor = normalColor
-        }
-        
-        if let selectedColor = customRatingControlSelectedColor {
-            RatingControl.appearance(for: traitCollection).selectedColor = selectedColor
-        }
-
         // Steps Properties
         if let bgViewColor = customStepsBackgroundViewColor {
             StepsBackgroundView.appearance(for: traitCollection).backgroundColor = bgViewColor
         }
         
         if let headerTintColor = customStepsTableHeaderTintColor {
-            StepsTableHeaderView.appearance(for: traitCollection).tintColor = headerTintColor
+            StepsViewController.appearance(for: traitCollection).tintColor = headerTintColor
         }
         
         if let headerTextColor = customStepsTableHeaderTextColor {
-            StepsTableHeaderView.appearance(for: traitCollection).normalTextColor = headerTextColor
+            StepsViewController.appearance(for: traitCollection).textColor = headerTextColor
         }
         
         if let instructionsBgColor = customStepInstructionsBackgroundColor {
