@@ -344,6 +344,151 @@ class ExpoMapboxNavigationViewController: UIViewController {
         update()
     }
 
+    func setStepsBackgroundColor(hexColor: String) {
+        customDayStyle.customStepsBackgroundColor = UIColor(hex: hexColor)
+        update()
+    }
+
+    func setStepsPrimaryTextColor(hexColor: String) {
+        customDayStyle.customStepsPrimaryTextColor = UIColor(hex: hexColor)
+        update()
+    }
+
+    func setStepsSecondaryTextColor(hexColor: String) {
+        customDayStyle.customStepsSecondaryTextColor = UIColor(hex: hexColor)
+        update()
+    }
+
+    func setStepsManeuverViewPrimaryColor(hexColor: String) {
+        customDayStyle.customStepsManeuverViewPrimaryColor = UIColor(hex: hexColor)
+        update()
+    }
+
+    func setLaneViewBackgroundColor(hexColor: String) {
+        customDayStyle.customLaneViewBackgroundColor = UIColor(hex: hexColor)
+        update()
+    }
+
+    func setNextBannerBackgroundColor(hexColor: String) {
+        customDayStyle.customNextBannerBackgroundColor = UIColor(hex: hexColor)
+        update()
+    }
+
+    func setNextBannerPrimaryTextColor(hexColor: String) {
+        customDayStyle.customNextBannerPrimaryTextColor = UIColor(hex: hexColor)
+        update()
+    }
+
+    func setNextBannerSecondaryTextColor(hexColor: String) {
+        customDayStyle.customNextBannerSecondaryTextColor = UIColor(hex: hexColor)
+        update()
+    }
+
+    func setNextBannerDistanceTextColor(hexColor: String) {
+        customDayStyle.customNextBannerDistanceTextColor = UIColor(hex: hexColor)
+        update()
+    }
+
+    func setProgressBarProgressColor(hexColor: String) {
+        customDayStyle.customProgressBarProgressColor = UIColor(hex: hexColor)
+        update()
+    }
+
+    func setProgressBarBackgroundColor(hexColor: String) {
+        customDayStyle.customProgressBarBackgroundColor = UIColor(hex: hexColor)
+        update()
+    }
+
+    func setManeuverViewPrimaryColor(hexColor: String) {
+        customDayStyle.customManeuverViewPrimaryColor = UIColor(hex: hexColor)
+        update()
+    }
+
+    func setManeuverViewSecondaryColor(hexColor: String) {
+        customDayStyle.customManeuverViewSecondaryColor = UIColor(hex: hexColor)
+        update()
+    }
+
+    func setManeuverViewPrimaryColorHighlighted(hexColor: String) {
+        customDayStyle.customManeuverViewPrimaryColorHighlighted = UIColor(hex: hexColor)
+        update()
+    }
+
+    func setManeuverViewSecondaryColorHighlighted(hexColor: String) {
+        customDayStyle.customManeuverViewSecondaryColorHighlighted = UIColor(hex: hexColor)
+        update()
+    }
+
+    func setInstructionsCardBackgroundColor(hexColor: String) {
+        customDayStyle.customInstructionsCardBackgroundColor = UIColor(hex: hexColor)
+        update()
+    }
+
+    func setInstructionsCardSeparatorColor(hexColor: String) {
+        customDayStyle.customInstructionsCardSeparatorColor = UIColor(hex: hexColor)
+        update()
+    }
+
+    func setInstructionsCardHighlightedSeparatorColor(hexColor: String) {
+        customDayStyle.customInstructionsCardHighlightedSeparatorColor = UIColor(hex: hexColor)
+        update()
+    }
+
+    func setExitViewForegroundColor(hexColor: String) {
+        customDayStyle.customExitViewForegroundColor = UIColor(hex: hexColor)
+        update()
+    }
+
+    func setExitViewBorderColor(hexColor: String) {
+        customDayStyle.customExitViewBorderColor = UIColor(hex: hexColor)
+        update()
+    }
+
+    func setExitViewHighlightColor(hexColor: String) {
+        customDayStyle.customExitViewHighlightColor = UIColor(hex: hexColor)
+        update()
+    }
+
+    func setRouteShieldForegroundColor(hexColor: String) {
+        customDayStyle.customRouteShieldForegroundColor = UIColor(hex: hexColor)
+        update()
+    }
+
+    func setRouteShieldBorderColor(hexColor: String) {
+        customDayStyle.customRouteShieldBorderColor = UIColor(hex: hexColor)
+        update()
+    }
+
+    func setRouteShieldHighlightColor(hexColor: String) {
+        customDayStyle.customRouteShieldHighlightColor = UIColor(hex: hexColor)
+        update()
+    }
+
+    func setDistanceRemainingColor(hexColor: String) {
+        customDayStyle.customDistanceRemainingColor = UIColor(hex: hexColor)
+        update()
+    }
+
+    func setDistanceUnitColor(hexColor: String) {
+        customDayStyle.customDistanceUnitColor = UIColor(hex: hexColor)
+        update()
+    }
+
+    func setDistanceValueColor(hexColor: String) {
+        customDayStyle.customDistanceValueColor = UIColor(hex: hexColor)
+        update()
+    }
+
+    func setRatingControlNormalColor(hexColor: String) {
+        customDayStyle.customRatingControlNormalColor = UIColor(hex: hexColor)
+        update()
+    }
+
+    func setRatingControlSelectedColor(hexColor: String) {
+        customDayStyle.customRatingControlSelectedColor = UIColor(hex: hexColor)
+        update()
+    }
+
     func update(){
         calculateRoutesTask?.cancel()
 

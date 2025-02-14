@@ -2,6 +2,9 @@ import Foundation
 import MapboxMaps
 import MapboxNavigationUIKit
 import UIKit
+import MapboxNavigation
+import MapboxCoreNavigation
+import MapboxDirections
 
 class CustomDayStyle: StandardDayStyle {
     var customSpeedLimitTextColor: UIColor?
