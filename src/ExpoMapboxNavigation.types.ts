@@ -100,7 +100,7 @@ export type ExpoMapboxNavigationViewProps = {
   maneuverViewSecondaryColorHighlighted?: string;
 
   // Instructions View
-  instructionsTextColor?: string;       // Color for all instruction text
+  instructionsTextColor?: string; // Color for all instruction text
   instructionsBackgroundColor?: string; // Background color for instruction panels
 
   // Instructions Card
