@@ -96,6 +96,11 @@ class ExpoMapboxNavigationViewController: UIViewController {
 
     let customDayStyle = CustomDayStyle()
 
+    private var bottomSheetViewController: UIViewController?
+    private var bottomSheetPanGestureRecognizer: UIPanGestureRecognizer?
+    private var bottomSheetTopConstraint: NSLayoutConstraint?
+    private let bottomSheetHeight: CGFloat = 300 // Adjust this value as needed
+
     init() {
         super.init(nibName: nil, bundle: nil)
         mapboxNavigation = ExpoMapboxNavigationViewController.navigationProvider.mapboxNavigation
@@ -344,151 +349,6 @@ class ExpoMapboxNavigationViewController: UIViewController {
         update()
     }
 
-    func setStepsBackgroundColor(hexColor: String) {
-        customDayStyle.customStepsBackgroundColor = UIColor(hex: hexColor)
-        update()
-    }
-
-    func setStepsPrimaryTextColor(hexColor: String) {
-        customDayStyle.customStepsPrimaryTextColor = UIColor(hex: hexColor)
-        update()
-    }
-
-    func setStepsSecondaryTextColor(hexColor: String) {
-        customDayStyle.customStepsSecondaryTextColor = UIColor(hex: hexColor)
-        update()
-    }
-
-    func setStepsManeuverViewPrimaryColor(hexColor: String) {
-        customDayStyle.customStepsManeuverViewPrimaryColor = UIColor(hex: hexColor)
-        update()
-    }
-
-    func setLaneViewBackgroundColor(hexColor: String) {
-        customDayStyle.customLaneViewBackgroundColor = UIColor(hex: hexColor)
-        update()
-    }
-
-    func setNextBannerBackgroundColor(hexColor: String) {
-        customDayStyle.customNextBannerBackgroundColor = UIColor(hex: hexColor)
-        update()
-    }
-
-    func setNextBannerPrimaryTextColor(hexColor: String) {
-        customDayStyle.customNextBannerPrimaryTextColor = UIColor(hex: hexColor)
-        update()
-    }
-
-    func setNextBannerSecondaryTextColor(hexColor: String) {
-        customDayStyle.customNextBannerSecondaryTextColor = UIColor(hex: hexColor)
-        update()
-    }
-
-    func setNextBannerDistanceTextColor(hexColor: String) {
-        customDayStyle.customNextBannerDistanceTextColor = UIColor(hex: hexColor)
-        update()
-    }
-
-    func setProgressBarProgressColor(hexColor: String) {
-        customDayStyle.customProgressBarProgressColor = UIColor(hex: hexColor)
-        update()
-    }
-
-    func setProgressBarBackgroundColor(hexColor: String) {
-        customDayStyle.customProgressBarBackgroundColor = UIColor(hex: hexColor)
-        update()
-    }
-
-    func setManeuverViewPrimaryColor(hexColor: String) {
-        customDayStyle.customManeuverViewPrimaryColor = UIColor(hex: hexColor)
-        update()
-    }
-
-    func setManeuverViewSecondaryColor(hexColor: String) {
-        customDayStyle.customManeuverViewSecondaryColor = UIColor(hex: hexColor)
-        update()
-    }
-
-    func setManeuverViewPrimaryColorHighlighted(hexColor: String) {
-        customDayStyle.customManeuverViewPrimaryColorHighlighted = UIColor(hex: hexColor)
-        update()
-    }
-
-    func setManeuverViewSecondaryColorHighlighted(hexColor: String) {
-        customDayStyle.customManeuverViewSecondaryColorHighlighted = UIColor(hex: hexColor)
-        update()
-    }
-
-    func setInstructionsCardBackgroundColor(hexColor: String) {
-        customDayStyle.customInstructionsCardBackgroundColor = UIColor(hex: hexColor)
-        update()
-    }
-
-    func setInstructionsCardSeparatorColor(hexColor: String) {
-        customDayStyle.customInstructionsCardSeparatorColor = UIColor(hex: hexColor)
-        update()
-    }
-
-    func setInstructionsCardHighlightedSeparatorColor(hexColor: String) {
-        customDayStyle.customInstructionsCardHighlightedSeparatorColor = UIColor(hex: hexColor)
-        update()
-    }
-
-    func setExitViewForegroundColor(hexColor: String) {
-        customDayStyle.customExitViewForegroundColor = UIColor(hex: hexColor)
-        update()
-    }
-
-    func setExitViewBorderColor(hexColor: String) {
-        customDayStyle.customExitViewBorderColor = UIColor(hex: hexColor)
-        update()
-    }
-
-    func setExitViewHighlightColor(hexColor: String) {
-        customDayStyle.customExitViewHighlightColor = UIColor(hex: hexColor)
-        update()
-    }
-
-    func setRouteShieldForegroundColor(hexColor: String) {
-        customDayStyle.customRouteShieldForegroundColor = UIColor(hex: hexColor)
-        update()
-    }
-
-    func setRouteShieldBorderColor(hexColor: String) {
-        customDayStyle.customRouteShieldBorderColor = UIColor(hex: hexColor)
-        update()
-    }
-
-    func setRouteShieldHighlightColor(hexColor: String) {
-        customDayStyle.customRouteShieldHighlightColor = UIColor(hex: hexColor)
-        update()
-    }
-
-    func setDistanceRemainingColor(hexColor: String) {
-        customDayStyle.customDistanceRemainingColor = UIColor(hex: hexColor)
-        update()
-    }
-
-    func setDistanceUnitColor(hexColor: String) {
-        customDayStyle.customDistanceUnitColor = UIColor(hex: hexColor)
-        update()
-    }
-
-    func setDistanceValueColor(hexColor: String) {
-        customDayStyle.customDistanceValueColor = UIColor(hex: hexColor)
-        update()
-    }
-
-    func setRatingControlNormalColor(hexColor: String) {
-        customDayStyle.customRatingControlNormalColor = UIColor(hex: hexColor)
-        update()
-    }
-
-    func setRatingControlSelectedColor(hexColor: String) {
-        customDayStyle.customRatingControlSelectedColor = UIColor(hex: hexColor)
-        update()
-    }
-
     func update(){
         calculateRoutesTask?.cancel()
 
@@ -562,6 +422,13 @@ class ExpoMapboxNavigationViewController: UIViewController {
         bottomBanner.distanceFormatter.locale = currentLocale
         bottomBanner.dateFormatter.locale = currentLocale
 
+        // Add pan gesture recognizer to bottom banner
+        let panGesture = UIPanGestureRecognizer(target: self, action: #selector(handleBottomBannerPan(_:)))
+        bottomBanner.view.addGestureRecognizer(panGesture)
+        
+        // Setup bottom sheet
+        setupBottomSheet()
+
         let navigationOptions = NavigationOptions(
             mapboxNavigation: self.mapboxNavigation!,
             voiceController: ExpoMapboxNavigationViewController.navigationProvider.routeVoiceController,
@@ -622,6 +489,76 @@ class ExpoMapboxNavigationViewController: UIViewController {
         }
         if let arrowColor = currentManeuverArrowColor {
             navigationMapView?.maneuverArrowColor = arrowColor
+        }
+    }
+
+    private func setupBottomSheet() {
+        bottomSheetViewController = UIViewController()
+        guard let bottomSheet = bottomSheetViewController else { return }
+        
+        bottomSheet.view.backgroundColor = .white
+        bottomSheet.view.layer.cornerRadius = 16
+        bottomSheet.view.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
+        bottomSheet.view.clipsToBounds = true
+        
+        // Add shadow
+        bottomSheet.view.layer.shadowColor = UIColor.black.cgColor
+        bottomSheet.view.layer.shadowOffset = CGSize(width: 0, height: -2)
+        bottomSheet.view.layer.shadowRadius = 3
+        bottomSheet.view.layer.shadowOpacity = 0.2
+        
+        addChild(bottomSheet)
+        view.addSubview(bottomSheet.view)
+        bottomSheet.didMove(toParent: self)
+        
+        bottomSheet.view.translatesAutoresizingMaskIntoConstraints = false
+        
+        // Position bottom sheet initially off screen
+        bottomSheetTopConstraint = bottomSheet.view.topAnchor.constraint(equalTo: view.bottomAnchor)
+        
+        NSLayoutConstraint.activate([
+            bottomSheet.view.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            bottomSheet.view.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            bottomSheet.view.heightAnchor.constraint(equalToConstant: bottomSheetHeight),
+            bottomSheetTopConstraint!
+        ])
+        
+        // Add some sample content to the bottom sheet
+        let label = UILabel()
+        label.text = "Bottom Sheet Content"
+        label.textAlignment = .center
+        
+        bottomSheet.view.addSubview(label)
+        label.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            label.centerXAnchor.constraint(equalTo: bottomSheet.view.centerXAnchor),
+            label.topAnchor.constraint(equalTo: bottomSheet.view.topAnchor, constant: 20)
+        ])
+    }
+    
+    @objc private func handleBottomBannerPan(_ gesture: UIPanGestureRecognizer) {
+        let translation = gesture.translation(in: view)
+        let velocity = gesture.velocity(in: view)
+        
+        switch gesture.state {
+        case .changed:
+            // Update bottom sheet position based on pan
+            let newConstant = view.frame.height - bottomSheetHeight + translation.y
+            bottomSheetTopConstraint?.constant = min(view.frame.height, max(newConstant, view.frame.height - bottomSheetHeight))
+            
+        case .ended:
+            // Determine whether to show or hide based on velocity and position
+            let shouldShow = velocity.y < 0 || bottomSheetTopConstraint?.constant ?? 0 < view.frame.height - bottomSheetHeight/2
+            
+            UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseOut) {
+                self.bottomSheetTopConstraint?.constant = shouldShow ? 
+                    self.view.frame.height - self.bottomSheetHeight : 
+                    self.view.frame.height
+                self.view.layoutIfNeeded()
+            }
+            
+        default:
+            break
         }
     }
 }
